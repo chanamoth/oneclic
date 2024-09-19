@@ -1,28 +1,19 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.page.html',
-    //styleUrls: ['./login.page.scss'],
+    styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
-    //loginForm: FormGroup; // Verifica que esto esté declarado correctamente
+export class LoginPage {
 
-    constructor(private formBuilder: FormBuilder, private router: Router) { }
+    passwordType: string = 'password';
+    passwordIcon: string = 'eye-off-outline';
 
-    ngOnInit() {
-        /*this.loginForm = this.formBuilder.group({
-            email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required]]
-        });*/
-    }
+    constructor() { }
 
-    onSubmit() {
-        /*if (this.loginForm.valid) {
-            // Lógica para iniciar sesión
-            this.router.navigate(['/home']);
-        }*/
+    togglePasswordVisibility() {
+        this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+        this.passwordIcon = this.passwordIcon === 'eye-off-outline' ? 'eye-outline' : 'eye-off-outline';
     }
 }

@@ -1,35 +1,34 @@
-<ion-content>
+<ion-content class="login-content">
   <div class="login-container">
     <div class="logo-container">
-      <ion-img src="assets/images/logo.webp"></ion-img> <!-- Aquí puedes poner tu logo -->
+      <ion-img src="assets/images/logo.webp"></ion-img> <!-- Asegúrate de tener tu logo aquí -->
     </div>
 
     <h1>Welcome Back</h1>
     <p>Log in to your account using email or social networks</p>
 
-    <ion-item>
+    <ion-item class="input-item">
       <ion-input placeholder="Email" type="email" clear-input="true"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="input-item">
       <ion-input placeholder="Password" type="password"></ion-input>
       <ion-icon slot="end" name="eye-off-outline" (click)="togglePasswordVisibility()"></ion-icon>
     </ion-item>
 
-    <ion-button expand="block">Login</ion-button>
-
     <a class="forgot-password" href="#">Forgot Password?</a>
 
-    <div class="social-login">
-      <p>Or login with</p>
-      <ion-button expand="block" fill="outline">
-        <ion-icon slot="start" name="logo-google"></ion-icon>Login with Google
-      </ion-button>
-      <ion-button expand="block" fill="outline">
-        <ion-icon slot="start" name="logo-facebook"></ion-icon>Login with Facebook
-      </ion-button>
-    </div>
+    <ion-button expand="block" class="login-button">Login</ion-button>
 
-    <p class="signup">First time here? <a href="#">Signup</a></p>
+    <p class="login-text">Or login with</p>
+
+    <ion-button expand="block" fill="outline" class="social-button google-button">
+      <ion-icon slot="start" name="logo-google"></ion-icon>Login with Google
+    </ion-button>
+    <ion-button expand="block" fill="outline" class="social-button facebook-button">
+      <ion-icon slot="start" name="logo-facebook"></ion-icon>Login with Facebook
+    </ion-button>
+
+    <p class="signup-text">First time here? <a href="#">Signup</a></p>
   </div>
 </ion-content>

@@ -1,19 +1,21 @@
 <ion-content class="login-content">
   <div class="login-container">
     <div class="logo-container">
-      <ion-img src="assets/images/logo.webp"></ion-img> <!-- Asegúrate de tener tu logo aquí -->
+      <ion-img src="assets/images/logo.webp"></ion-img>
     </div>
 
     <h1>Welcome Back</h1>
     <p>Log in to your account using email or social networks</p>
 
     <ion-item class="input-item">
+      <ion-icon name="mail-outline" slot="start" class="input-icon"></ion-icon>
       <ion-input placeholder="Email" type="email" clear-input="true"></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
-      <ion-input placeholder="Password" type="password"></ion-input>
-      <ion-icon slot="end" name="eye-off-outline" (click)="togglePasswordVisibility()"></ion-icon>
+      <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
+      <ion-input placeholder="Password" [type]="passwordType"></ion-input>
+      <ion-icon slot="end" [name]="passwordIcon" (click)="togglePasswordVisibility()"></ion-icon>
     </ion-item>
 
     <a class="forgot-password" href="#">Forgot Password?</a>

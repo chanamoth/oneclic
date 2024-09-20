@@ -6,40 +6,31 @@
     height: 100%;
     padding: 0 20px;
 
-    .logo-container {
-        margin-bottom: 20px;
-        width: 80px;
-        height: 80px;
-    }
-
     h1 {
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-size: 22px;
+        margin-bottom: 10px;
+
+        ion-icon {
+            font-size: 24px;
+            margin-left: 5px;
+        }
     }
 
     p {
-        font-size: 14px;
-        color: #7a7a7a;
-        margin-bottom: 20px;
+        font-size: 15px;
+        color: #555;
+    }
+
+    .text-center {
         text-align: center;
     }
 
     ion-item.input-item {
         width: 100%;
-        --background: #f9f9f9;
-        --border-radius: 10px;
-        --padding-start: 16px;
-        --padding-end: 16px;
-        box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-        margin: 10px 0;
-        border-radius: 12px;
-    }
-
-    .input-icon {
-        color: #7a7a7a;
-        margin-right: 10px;
-        font-size: 20px;
+        border: 1px solid #e0e0e0;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        transition: border-color 0.3s ease-in-out;
     }
 
     ion-input {
@@ -48,13 +39,26 @@
     }
 
     ion-item.input-item:focus-within {
-        --border-width: 2px;
-        --border-style: solid;
-        --border-color: #5e747d;
+        border: 1px solid #232323;
+        /* Borde visible en focus */
+    }
+
+    ion-item.input-item.has-value {
+        border: 1px solid #572364;
+        /* Borde visible cuando tiene valor */
+    }
+
+    ion-item.input-item::part(native) {
+        border: none;
+    }
+
+    ion-icon {
+        color: #7a7a7a;
     }
 
     .forgot-password {
-        color: #7a7a7a;
+        text-decoration: none;
+        color: #572364;
         font-size: 14px;
         margin-top: 10px;
         align-self: flex-end;
@@ -62,32 +66,20 @@
 
     .login-button {
         width: 100%;
-        --background: #5e747d;
-        --border-radius: 12px;
-        margin: 20px 0;
-    }
-
-    .login-text {
-        color: #7a7a7a;
-        font-size: 14px;
-        margin-bottom: 10px;
+        margin-top: 12px;
+        --background: #232323;
+        color: white;
+        border: none;
+        --border-radius: 4px;
+        font-size: 15px;
     }
 
     .social-button {
         width: 100%;
         margin-bottom: 10px;
-        --border-radius: 12px;
-        --background: #ffffff;
-        --color: #7a7a7a;
-        border: 1px solid #7a7a7a;
-    }
-
-    .google-button ion-icon {
-        color: #db4437;
-    }
-
-    .facebook-button ion-icon {
-        color: #4267B2;
+        --border-radius: 4px;
+        --background: #4267B2;
+        --color: #ffffff;
     }
 
     .signup-text {
@@ -96,7 +88,8 @@
         color: #7a7a7a;
 
         a {
-            color: #5e747d;
+            text-decoration: none;
+            color: #572364;
         }
     }
 }

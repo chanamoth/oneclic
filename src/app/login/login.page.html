@@ -1,36 +1,29 @@
 <ion-content class="login-content">
   <div class="login-container">
-    <div class="logo-container">
-      <ion-img src="assets/images/logo.webp"></ion-img>
-    </div>
+    <ion-back-button class="back-button"></ion-back-button> <!-- Botón de retroceso -->
 
-    <h1>Welcome Back</h1>
-    <p>Log in to your account using email or social networks</p>
+    <h1>¡Hola! 👋</h1>
+    <p class="text-center">Para continuar, por favor ingresa tus credenciales</p>
 
-    <ion-item class="input-item">
-      <ion-icon name="mail-outline" slot="start" class="input-icon"></ion-icon>
-      <ion-input placeholder="Email" type="email" clear-input="true"></ion-input>
+    <ion-item class="input-item" [class.has-value]="email">
+      <ion-input placeholder="Correo electrónico" type="email" clear-input="true" [(ngModel)]="email"></ion-input>
     </ion-item>
 
-    <ion-item class="input-item">
-      <ion-icon name="lock-closed-outline" slot="start" class="input-icon"></ion-icon>
-      <ion-input placeholder="Password" [type]="passwordType"></ion-input>
+    <ion-item class="input-item" [class.has-value]="password">
+      <ion-input placeholder="Contraseña" [type]="passwordType" [(ngModel)]="password"></ion-input>
       <ion-icon slot="end" [name]="passwordIcon" (click)="togglePasswordVisibility()"></ion-icon>
     </ion-item>
 
-    <a class="forgot-password" href="#">Forgot Password?</a>
+    <a class="forgot-password" href="#">¿Olvidaste tu contraseña?</a>
 
-    <ion-button expand="block" class="login-button">Login</ion-button>
+    <ion-button expand="block" class="login-button">Iniciar sesión</ion-button>
 
-    <p class="login-text">Or login with</p>
+    <p class="login-text">O inicia sesión con</p>
 
-    <ion-button expand="block" fill="outline" class="social-button google-button">
-      <ion-icon slot="start" name="logo-google"></ion-icon>Login with Google
-    </ion-button>
     <ion-button expand="block" fill="outline" class="social-button facebook-button">
-      <ion-icon slot="start" name="logo-facebook"></ion-icon>Login with Facebook
+      Facebook
     </ion-button>
 
-    <p class="signup-text">First time here? <a href="#">Signup</a></p>
+    <p class="signup-text">¿No tienes cuenta? <a href="#">Regístrate</a></p>
   </div>
 </ion-content>

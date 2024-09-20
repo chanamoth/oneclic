@@ -16,6 +16,15 @@ export class OficialStoresPage implements OnInit {
   currentPage = 0; // Página actual
   loadingMore = false; // Estado de carga
 
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    autoplay: {
+      delay: 3000,
+    },
+    loop: true,
+  };
+
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -32,13 +41,13 @@ export class OficialStoresPage implements OnInit {
       response.subscribe((data: any) => {
         if (data && data.results && data.results.comercios) {
           this.comercios = data.results.comercios.comercios || [];
-          this.banners = data.banners || [];
-          /*this.banners = [
-            { img: 'path_to_image1' },
-            { img: 'path_to_image2' },
-            { img: 'path_to_image3' },
-          ];*/
-        
+          //this.banners = data.banners || [];
+          this.banners = [
+            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
+            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
+            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
+          ];
+
           this.loadMore(); // Cargar los primeros 10 comercios
         }
       });

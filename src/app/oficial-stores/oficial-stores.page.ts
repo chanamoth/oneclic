@@ -32,12 +32,12 @@ export class OficialStoresPage implements OnInit {
       response.subscribe((data: any) => {
         if (data && data.results && data.results.comercios) {
           this.comercios = data.results.comercios.comercios || [];
-          //this.banners = data.banners || [];
-          this.banners = [
+          this.banners = data.banners || [];
+          /*this.banners = [
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
-          ];
+          ];*/
 
           console.log(data);
           this.loadMore(); // Cargar los primeros 10 comercios

@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
+import { FavoritesPage } from './favorites.page';
 import { FavoritesPageRoutingModule } from './favorites-routing.module';
 
-import { FavoritesPage } from './favorites.page';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritesPageRoutingModule
+    FavoritesPageRoutingModule,
+    SharedModule
   ],
   declarations: [FavoritesPage]
 })
-export class FavoritesPageModule {}
+export class FavoritesPageModule { }

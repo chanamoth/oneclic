@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms'; // Asegúrate de importar 
 import { IonicModule } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage-angular';
 
 @NgModule({
   declarations: [AppComponent],
@@ -11,7 +13,9 @@ import { AppComponent } from './app.component';
     BrowserModule,
     ReactiveFormsModule, // Asegúrate de incluirlo aquí si se necesita
     IonicModule.forRoot(),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    IonicStorageModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

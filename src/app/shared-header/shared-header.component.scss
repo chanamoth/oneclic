@@ -1,0 +1,15 @@
+ion-header {
+    --border-width: 0 0 0px 0;
+    --border-color: #e0e0e0;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
+    /* Sombra más sutil */
+}
+
+ion-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+ion-back-button {
+    color: #5e747d;
+}

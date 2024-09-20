@@ -27,6 +27,10 @@ const routes: Routes = [
     loadChildren: () => import('./messages/messages.module').then(m => m.MessagesPageModule)
   },
   {
+    path: 'oficial-stores',
+    loadChildren: () => import('./oficial-stores/oficial-stores.module').then(m => m.OficialStoresPageModule)
+  },
+  {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
@@ -46,6 +50,10 @@ const routes: Routes = [
   {
     path: 'messages',
     loadChildren: () => import('./messages/messages.module').then( m => m.MessagesPageModule)
+  },
+  {
+    path: 'oficial-stores',
+    loadChildren: () => import('./oficial-stores/oficial-stores.module').then( m => m.OficialStoresPageModule)
   }
 ];
 

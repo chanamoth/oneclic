@@ -1,0 +1,47 @@
+<app-shared-header title="Tiendas Oficiales"></app-shared-header>
+
+<ion-content>
+  <!-- Banner de la parte superior -->
+  <ion-slides pager="true" autoplay="true">
+    <ion-slide *ngFor="let banner of banners">
+      <img [src]="banner.img" alt="Banner" loading="lazy"/>
+    </ion-slide>
+  </ion-slides>
+
+  <!-- Título principal -->
+  <h2 class="page-title">¡Encuentra tu Tienda Favorita!</h2>
+
+  <!-- Filtros: Dropdown de nombre y buscador -->
+  <div class="filters">
+    <ion-item>
+      <ion-select placeholder="Nombre">
+        <ion-select-option value="nombre1">Nombre 1</ion-select-option>
+        <ion-select-option value="nombre2">Nombre 2</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-input placeholder="Buscar tiendas..."></ion-input>
+    </ion-item>
+  </div>
+
+  <!-- Cuadrícula de tiendas destacadas -->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let comercio of loadedComercios">
+        <ion-card>
+          <img [src]="'https://oneclic.app/' + comercio.folder + comercio.logo" alt="{{comercio.nombre}}"
+            loading="lazy" />
+          <ion-card-title>{{ comercio.nombre }}</ion-card-title>
+          <p>{{ comercio.descripcion }}</p>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+      loadingText="Cargando más tiendas..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>

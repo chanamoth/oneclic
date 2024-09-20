@@ -1,5 +1,5 @@
 <ion-menu side="start" menuId="first" contentId="main-content">
-  <ion-header translucent>
+  <ion-header>
     <ion-toolbar>
       <ion-item lines="none">
         <ion-avatar slot="start">
@@ -47,10 +47,11 @@
         <ion-icon slot="icon-only" name="bag-outline"></ion-icon> <!-- Ícono de carrito -->
       </ion-button>
     </ion-buttons>
+    <ion-progress-bar type="indeterminate"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
-<ion-content id="main-content">
+<ion-content id="main-content" [fullscreen]="true" color="light" class="ion-padding">
   <div id="container">
     <strong>Ready to create an app?</strong>
     <p>Start with Ionic <a routerLink="/login" text="">UI Components</a></p>
@@ -58,31 +59,7 @@
 </ion-content>
 
 <ion-footer>
-  <ion-tabs>
-    <ion-tab-bar slot="bottom">
-      <ion-tab-button tab="home">
-        <ion-icon name="home-outline"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button tab="notifications">
-        <ion-icon name="notifications-outline"></ion-icon>
-        <ion-badge color="danger">3</ion-badge>
-      </ion-tab-button>
-
-      <ion-tab-button class="middle-button" tab="create">
-        <div class="add-button">
-          <ion-icon name="add-outline"></ion-icon>
-        </div>
-      </ion-tab-button>
-
-      <ion-tab-button tab="favorites">
-        <ion-icon name="heart-outline"></ion-icon>
-      </ion-tab-button>
-
-      <ion-tab-button tab="messages">
-        <ion-icon name="chatbubble-ellipses-outline"></ion-icon>
-        <ion-badge color="danger">5</ion-badge>
-      </ion-tab-button>
-    </ion-tab-bar>
-  </ion-tabs>
+  <ion-toolbar>
+    <ion-title> Footer </ion-title>
+  </ion-toolbar>
 </ion-footer>

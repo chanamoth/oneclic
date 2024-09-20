@@ -16,15 +16,6 @@ export class OficialStoresPage implements OnInit {
   currentPage = 0; // Página actual
   loadingMore = false; // Estado de carga
 
-  slideOpts = {
-    initialSlide: 0,
-    speed: 400,
-    autoplay: {
-      delay: 3000,
-    },
-    loop: true,
-  };
-
   constructor(private apiService: ApiService) { }
 
   ngOnInit() {
@@ -48,6 +39,7 @@ export class OficialStoresPage implements OnInit {
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
           ];
 
+          console.log(data);
           this.loadMore(); // Cargar los primeros 10 comercios
         }
       });

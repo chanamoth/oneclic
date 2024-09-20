@@ -1,11 +1,10 @@
 <app-shared-header title="Tiendas Oficiales"></app-shared-header>
 
-<ion-content>
-  <ion-slides [options]="slideOpts" pager="true">
-    <ion-slide *ngFor="let banner of banners">
-      <img [src]="banner.img" class="banner-img" loading="lazy" />
-    </ion-slide>
-  </ion-slides>
+<ion-content [fullscreen]="true" color="light" class="ion-padding">
+
+  <swiper-container [loop]="true" [pagination]="true">
+    <swiper-slide *ngFor="let banner of banners"><img [src]="banner.img" class="banner-img" alt="Banner" loading="lazy" /></swiper-slide>
+  </swiper-container>
 
   <!-- Título principal -->
   <h2 class="page-title">¡Encuentra tu Tienda Favorita!</h2>
@@ -40,8 +39,7 @@
   </ion-grid>
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-    <ion-infinite-scroll-content loadingSpinner="bubbles"
-      loadingText="Cargando más tiendas..."></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
 </ion-content>

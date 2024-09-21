@@ -1,0 +1,26 @@
+.custom-splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #f4f5f8;
+    /* Fondo del splash */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    /* Asegura que esté sobre todo */
+}
+
+.logo {
+    width: 150px;
+    /* Tamaño del logo */
+    height: auto;
+}
+
+.hidden {
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+    pointer-events: none;
+}

@@ -48,7 +48,7 @@ ion-button {
 }
 
 ion-menu::part(container) {
-  border-radius: 0 10px 10px 0;
+  border-radius: 0 15px 0 0;
 }
 
 #container {
@@ -76,86 +76,60 @@ ion-menu::part(container) {
   text-decoration: none;
 }
 
-ion-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 10;
-  /* Asegura que esté visible sobre otros elementos */
+/* Estilos específicos para la clase 'toolbar-menu' */
+.toolbar-menu {
+  --background: #f4f5f8;
+  padding: 10px;
+  box-shadow: none;
+  border: none;
+
+  ion-item {
+    --inner-padding-start: 0;
+    --inner-padding-end: 0;
+  }
+
+  ion-item-divider {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+
+  ion-avatar {
+    width: 50px;
+    height: 50px;
+
+    img {
+      border-radius: 50%;
+      /* Asegura que la imagen sea circular */
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 18px;
+    /* Ajusta el tamaño del nombre */
+  }
+
+  p {
+    margin: 10px 0 0 0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  ion-item {
+    --background: transparent;
+    /* Quitar el fondo por defecto de ion-item */
+  }
 }
 
 ion-tab-bar {
-  --background: #ffffff;
-  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.05);
+  --background: #fff; /* Fondo blanco */
+  --color-selected: #3880ff; /* Color de la tab seleccionada */
+  --color: #555; /* Color de las tabs no seleccionadas */
 }
 
-.middle-button {
-  position: relative;
-  margin-top: -30px;
-  /* Eleva el botón central */
-}
-
-.add-button {
-  background-color: #000000;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #ffffff;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-  border: 2px solid #ffffff;
-  /* Borde blanco alrededor del botón central */
-}
-
-ion-badge {
-  position: absolute;
-  top: -5px;
-  right: -10px;
-  font-size: 12px;
-  background-color: #e00000;
-  /* Rojo de las notificaciones */
-}
-
-/**/
-ion-toolbar {
-  background-color: #f5f5f5;
-}
-
-ion-item {
-  --inner-padding-end: 16px;
-  --inner-padding-start: 16px;
-  --min-height: 50px;
-  --background: transparent;
-  font-weight: 500;
-}
-
-.username, .user-email {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
-  width: 100%; /* Ajusta según sea necesario */
-}
-
-ion-avatar img {
-  border-radius: 50%;
-}
-
-ion-list {
-  margin-top: 15px;
-}
-
-ion-icon {
-  font-size: 20px;
-  color: #555;
-}
-
-ion-button {
-  color: #888;
-}
-
-ion-menu {
-  --width: 280px;
+ion-tab-button {
+  font-size: 14px;
 }

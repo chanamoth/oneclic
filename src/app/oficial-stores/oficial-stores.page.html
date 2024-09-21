@@ -1,8 +1,8 @@
 <app-shared-header title="Tiendas Oficiales" [isLoading]="isLoading"></app-shared-header>
 
-<ion-content [fullscreen]="true" color="light" class="ion-padding">
+<ion-content color="light" class="ion-padding" (ionScroll)="onScroll($event)">
 
-  <div *ngIf="!isLoading">
+  <div class="content" *ngIf="!isLoading">
 
     <swiper-container [loop]="true" [pagination]="true">
       <swiper-slide *ngFor="let banner of banners"><img [src]="banner.img" class="banner-img" alt="Banner"

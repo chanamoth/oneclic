@@ -1,13 +1,51 @@
 ion-header {
-    --border-width: 0 0 0px 0;
-    --border-color: #e0e0e0;
-    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.0);
-    /* Sombra más sutil */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    --background: transparent !important;
+    /* Forzar transparencia inicial */
+    --color: transparent;
+    /* Texto transparente inicialmente */
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: none;
+    /* Transición suave */
+}
+
+.header-visible {
+    --background: white !important;
+    /* Fondo blanco al hacer scroll */
+    --color: black !important;
+    /* Texto negro al hacer scroll */
+}
+
+ion-toolbar {
+    --min-height: 56px;
+    /* Asegúrate de que el tamaño de la cabecera sea adecuado */
+    --background: transparent !important;
+    /* Asegurar transparencia en el toolbar también */
 }
 
 ion-title {
-    font-size: 20px;
+    font-size: 1.2rem;
     font-weight: bold;
+    opacity: 0;
+    /* Oculto inicialmente */
+    transition: opacity 0.3s ease;
+}
+
+.header-visible ion-title {
+    opacity: 1;
+    /* Mostrar el título al hacer scroll */
+}
+
+.content {
+    position: relative;
+    z-index: 1;
+    /* Asegura que el contenido esté detrás de la cabecera */
+    padding-top: 56px;
+    /* Evitar que el contenido quede bajo la cabecera */
 }
 
 ion-back-button {

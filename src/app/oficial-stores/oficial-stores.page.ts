@@ -9,6 +9,13 @@ import { ApiService } from '../services/api.service';
 
 export class OficialStoresPage implements OnInit {
 
+  scrolled: boolean = false;
+
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+    this.scrolled = scrollTop > 50; // Cambia a true cuando el scroll es mayor a 50px
+  }
+
   loadedComercios: any[] = []; // Comercios cargados
   banners: any[] = []; // Almacena las imágenes del banner
   comercios: any[] = []; // Todos los comercios disponibles

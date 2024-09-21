@@ -1,9 +1,9 @@
-<ion-header [translucent]="true">
+<ion-header [ngClass]="{'header-transparent': !scrolled, 'header-visible': scrolled}">
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
-    <ion-title>{{ title }}</ion-title> <!-- El título solo aparece al hacer scroll -->
-    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+    <ion-title *ngIf="scrolled">{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>

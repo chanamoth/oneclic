@@ -10,12 +10,6 @@ import { ApiService } from '../services/api.service';
 export class OficialStoresPage implements OnInit {
 
   scrolled: boolean = false;
-
-  onScroll(event: any) {
-    const scrollTop = event.detail.scrollTop;
-    this.scrolled = scrollTop > 50; // Cambia a true cuando el scroll es mayor a 50px
-  }
-
   loadedComercios: any[] = []; // Comercios cargados
   banners: any[] = []; // Almacena las imágenes del banner
   comercios: any[] = []; // Todos los comercios disponibles
@@ -33,6 +27,13 @@ export class OficialStoresPage implements OnInit {
     this.loadInitialData();
   }
 
+  // Método para manejar el evento de scroll
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+    this.scrolled = scrollTop > 50;
+  }
+
+  // Método para cargar los datos iniciales
   loadInitialData() {
     this.apiService.post('search/get_rubros_app', {
       pais: 'PE',
@@ -44,11 +45,6 @@ export class OficialStoresPage implements OnInit {
         if (data && data.results && data.results.comercios) {
           this.comercios = data.results.comercios.comercios || [];
           this.banners = data.banners || [];
-          /*this.banners = [
-            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
-            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
-            { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
-          ];*/
           this.loadMore(); // Cargar los primeros 10 comercios
           this.isLoading = false;
         }
@@ -56,6 +52,7 @@ export class OficialStoresPage implements OnInit {
     });
   }
 
+  // Método para cargar más comercios
   loadMore(event?: any) {
     if (this.loadingMore) return; // Evitar solicitudes múltiples
     this.loadingMore = true;
@@ -77,4 +74,14 @@ export class OficialStoresPage implements OnInit {
     }
   }
 
+  // Método para refrescar los datos al usar el refresher
+  refreshData() {
+    this.isLoading = true;
+    this.currentPage = 0; // Reiniciar la página actual
+    this.loadedComercios = []; // Vaciar los comercios cargados
+    this.loadInitialData(); // Volver a cargar los datos
+    setTimeout(() => {
+      this.isLoading = false;
+    }, 1500); // Simular un tiempo de carga
+  }
 }

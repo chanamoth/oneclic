@@ -2,6 +2,8 @@
 
 <ion-content color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
 
+  <app-shared-refresher (refreshEvent)="refreshData()"></app-shared-refresher>
+
   <div class="content" *ngIf="!isLoading">
 
     <swiper-container [loop]="true" [pagination]="true">

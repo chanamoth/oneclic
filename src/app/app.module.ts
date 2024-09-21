@@ -6,9 +6,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { SharedRefresherComponent } from './shared-refresher/shared-refresher.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, SharedRefresherComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule, // Asegúrate de incluirlo aquí si se necesita
@@ -17,7 +18,10 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     HttpClientModule,
     IonicStorageModule.forRoot()
   ],
+  exports: [
+    SharedRefresherComponent // Exportar para usar en otros lugares
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

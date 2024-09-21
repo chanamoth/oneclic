@@ -37,11 +37,20 @@
         <ion-col size="6" *ngFor="let comercio of loadedComercios">
           <ion-card class="store-card">
             <ion-card-content>
+
+              <div class="badge-discount" *ngIf="comercio.cupones > 0">
+                DESCUENTOS
+              </div>
+
+              <!-- Imagen de placeholder mientras se carga -->
               <img [src]="'assets/images/user-placeholder.webp'" class="store-logo-placeholder" loading="lazy"
                 [class.hidden]="comercio.logoLoaded" />
+
               <!-- Imagen del comercio -->
               <img [src]="serverUrl + comercio.folder + comercio.logo" class="store-logo" loading="lazy"
                 (load)="comercio.logoLoaded = true" *ngIf="comercio.logo" />
+
+              <!-- Imagen del comercio por defecto -->
               <img [src]="serverUrl + 'img/default.png'" class="store-logo" loading="lazy"
                 (load)="comercio.logoLoaded = true" *ngIf="!comercio.logo" />
               <br>

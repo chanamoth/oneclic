@@ -38,6 +38,7 @@ ion-card-content {
 }
 
 .store-card {
+    position: relative;
     text-align: center;
     border: none;
     border-radius: 0;
@@ -48,11 +49,25 @@ ion-card-content {
     padding: 5px;
 }
 
+.badge-discount {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    background-color: #28c088;
+    color: white;
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 0 5px 5px 5px;
+    font-weight: bold;
+    z-index: 10;
+  }
+
 .store-logo {
     width: 90px;
     height: auto;
     margin-bottom: 10px;
     border-radius: 50%;
+    object-fit: contain;
 }
 
 .store-logo-placeholder {

@@ -6,6 +6,9 @@ import { Storage } from '@ionic/storage-angular';
   providedIn: 'root'
 })
 export class ApiService {
+
+  private readonly serverUrl: string = 'https://oneclic.app/';
+
   private apiUrl = 'https://api.oneclic.app/';
   private defaultHeaders = {
     Authorization: 'MTpwNDU1YXBwbDRndTE0',
@@ -14,6 +17,10 @@ export class ApiService {
 
   constructor(private http: HttpClient, private storage: Storage) {
     this.init();
+  }
+
+  getServerUrl(): string {
+    return this.serverUrl;
   }
 
   // Initialize storage

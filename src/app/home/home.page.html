@@ -15,22 +15,21 @@
 
   <ion-content>
     <ion-list>
-      <ion-item routerLink="/home">
+      <ion-item routerLink="/home" (click)="closeMenu()">
         <ion-icon name="home-outline" slot="start"></ion-icon>
         <ion-label>Inicio</ion-label>
       </ion-item>
-      <ion-item routerLink="/login">
+      <ion-item routerLink="/login" (click)="closeMenu()">
         <ion-icon name="person-outline" slot="start"></ion-icon>
         <ion-label>Mi Perfil</ion-label>
       </ion-item>
-      <ion-item routerLink="/oficial-stores">
+      <ion-item routerLink="/oficial-stores" (click)="closeMenu()">
         <ion-icon name="home-outline" slot="start"></ion-icon>
         <ion-label>Tiendas Oficiales</ion-label>
       </ion-item>
     </ion-list>
   </ion-content>
 </ion-menu>
-
 
 <ion-header [translucent]="true">
   <ion-toolbar>

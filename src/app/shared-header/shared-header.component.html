@@ -2,7 +2,7 @@
   <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" text=""></ion-back-button>
+      <ion-back-button defaultHref="/" [ngClass]="{'back-button-gradient': !scrolled, 'back-button-visible': scrolled}" text=""></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="scrolled">{{ title }}</ion-title>
   </ion-toolbar>

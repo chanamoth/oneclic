@@ -23,8 +23,11 @@ export class OficialStoresPage implements OnInit {
   currentPage = 0; // Página actual
   loadingMore = false; // Estado de carga
   isLoading: boolean = true;
+  serverUrl: string;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService) {
+    this.serverUrl = this.apiService.getServerUrl();
+  }
 
   ngOnInit() {
     this.loadInitialData();

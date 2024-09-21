@@ -7,4 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class SharedHeaderComponent {
   @Input() title: string = ''; // El título será dinámico
+  @Input() isLoading: boolean = false;
 }

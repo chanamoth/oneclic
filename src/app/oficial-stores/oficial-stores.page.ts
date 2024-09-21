@@ -15,6 +15,7 @@ export class OficialStoresPage implements OnInit {
   itemsPerPage = 10; // Cantidad por página
   currentPage = 0; // Página actual
   loadingMore = false; // Estado de carga
+  isLoading: boolean = true;
 
   constructor(private apiService: ApiService) { }
 
@@ -38,9 +39,8 @@ export class OficialStoresPage implements OnInit {
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
             { img: 'https://oneclic.app/img/banners_guia/guia_homePE_mobil.webp' },
           ];*/
-
-          console.log(data);
           this.loadMore(); // Cargar los primeros 10 comercios
+          this.isLoading = false;
         }
       });
     });

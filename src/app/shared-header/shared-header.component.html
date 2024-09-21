@@ -4,6 +4,6 @@
       <ion-back-button defaultHref="/" text=""></ion-back-button>
     </ion-buttons>
     <ion-title>{{ title }}</ion-title> <!-- El título solo aparece al hacer scroll -->
-    <ion-progress-bar type="indeterminate"></ion-progress-bar>
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>

@@ -18,24 +18,21 @@
     <h2 class="page-title">Tiendas Oficiales</h2>
     <p class="page-subtitle">Tus marcas preferidas ya están en OneClic</p>
 
+    <ion-toast [isOpen]="showAlert" trigger="open-toast" message="No se encontraron tiendas." [duration]="5000"></ion-toast>
+
     <!-- Filtros: Dropdown de nombre y buscador -->
     <div class="filters">
-      <ion-item>
-        <ion-select placeholder="Nombre">
-          <ion-select-option value="nombre1">Nombre 1</ion-select-option>
-          <ion-select-option value="nombre2">Nombre 2</ion-select-option>
-        </ion-select>
-      </ion-item>
 
       <ion-item>
-        <ion-input placeholder="Buscar tiendas..."></ion-input>
+        <ion-input placeholder="Buscar tienda..." (ionInput)="onSearch($event)"></ion-input>
       </ion-item>
+
     </div>
 
     <!-- Cuadrícula de tiendas destacadas -->
     <ion-grid>
       <ion-row>
-        <ion-col size="6" *ngFor="let comercio of loadedComercios">
+        <ion-col size="6" *ngFor="let comercio of filteredComercios">
           <ion-card class="store-card">
             <ion-card-content>
 

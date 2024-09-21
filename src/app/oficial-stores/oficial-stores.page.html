@@ -3,8 +3,10 @@
 <ion-content [fullscreen]="true" color="light" class="ion-padding">
 
   <div *ngIf="!isLoading">
+
     <swiper-container [loop]="true" [pagination]="true">
-      <swiper-slide *ngFor="let banner of banners"><img [src]="banner.img" class="banner-img" alt="Banner" loading="lazy" /></swiper-slide>
+      <swiper-slide *ngFor="let banner of banners"><img [src]="banner.img" class="banner-img" alt="Banner"
+          loading="lazy" /></swiper-slide>
     </swiper-container>
 
     <!-- Título principal -->
@@ -27,12 +29,11 @@
     <!-- Cuadrícula de tiendas destacadas -->
     <ion-grid>
       <ion-row>
-        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let comercio of loadedComercios">
-          <ion-card class="comercio-card">
-            <ion-img [src]="'https://oneclic.app/' + comercio.folder + comercio.logo" alt="{{comercio.nombre}}"></ion-img>
+        <ion-col size="6" *ngFor="let comercio of loadedComercios">
+          <ion-card class="store-card">
             <ion-card-content>
-              <ion-card-title>{{ comercio.nombre }}</ion-card-title>
-              <p class="comercio-descripcion">{{ comercio.descripcion }}</p>
+              <img [src]="'https://oneclic.app/' + comercio.folder + comercio.logo" class="store-logo" loading="lazy" />
+              <ion-label class="store-name">{{ comercio.nombre }}</ion-label>
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -42,7 +43,7 @@
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
       <ion-infinite-scroll-content></ion-infinite-scroll-content>
     </ion-infinite-scroll>
-  
+
   </div>
 
 </ion-content>

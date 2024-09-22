@@ -26,7 +26,7 @@ export class OficialStoresPage implements OnInit {
   noMoreData = false; // Control para saber si ya no hay más datos para cargar
   filteredComercios: any[] = []; // Comercios filtrados por búsqueda
 
-  constructor(private apiService: ApiService) {
+  constructor(public apiService: ApiService) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -90,6 +90,7 @@ export class OficialStoresPage implements OnInit {
 
     // Añadir los nuevos comercios al bloque actual de loadedComercios
     this.loadedComercios = [...this.loadedComercios, ...newItems];
+    this.showAlert = this.loadedComercios.length === 0; // Mostrar alerta si no hay resultados
 
     // Si no se encontraron más elementos, marcar como no hay más datos
     if (newItems.length < this.itemsPerPage) {

@@ -8,7 +8,7 @@
 
     <swiper-container [loop]="true" [pagination]="true">
       <swiper-slide *ngFor="let banner of banners">
-        <img [src]="'assets/images/banner-placeholder.webp'" class="banner-img" loading="lazy"
+        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img" loading="lazy"
           [class.hidden]="banner.logoLoaded">
         <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
       </swiper-slide>
@@ -42,7 +42,7 @@
               </div>
 
               <!-- Imagen de placeholder mientras se carga -->
-              <img [src]="'assets/images/user-placeholder.webp'" class="store-logo-placeholder" loading="lazy"
+              <img [src]="apiService.getOptimizedImageUrl(comercio.folder, comercio.logo, 'logo')" class="store-logo-placeholder" loading="lazy"
                 [class.hidden]="comercio.logoLoaded" />
 
               <!-- Imagen del comercio -->

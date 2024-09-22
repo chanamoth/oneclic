@@ -18,7 +18,8 @@
     <h2 class="page-title">Tiendas Oficiales</h2>
     <p class="page-subtitle">Tus marcas preferidas ya están en OneClic</p>
 
-    <ion-toast [isOpen]="showAlert" trigger="open-toast" message="No se encontraron tiendas." [duration]="5000"></ion-toast>
+    <ion-toast [isOpen]="showAlert" trigger="open-toast" message="No se encontraron tiendas."
+      [duration]="5000"></ion-toast>
 
     <!-- Filtros: Dropdown de nombre y buscador -->
     <div class="filters">
@@ -32,7 +33,7 @@
     <!-- Cuadrícula de tiendas destacadas -->
     <ion-grid>
       <ion-row>
-        <ion-col size="6" *ngFor="let comercio of filteredComercios">
+        <ion-col size="6" *ngFor="let comercio of loadedComercios">
           <ion-card class="store-card">
             <ion-card-content>
 
@@ -62,7 +63,8 @@
     </ion-grid>
 
     <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content></ion-infinite-scroll-content>
+      <ion-infinite-scroll-content loadingSpinner="crescent"
+        loadingText="Cargando más tiendas..."></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
   </div>

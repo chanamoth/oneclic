@@ -1,6 +1,6 @@
 <app-shared-header title="Tiendas Oficiales" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
+<ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
 
   <app-shared-refresher (refreshEvent)="refreshData()"></app-shared-refresher>
 

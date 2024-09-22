@@ -129,6 +129,16 @@ ion-tab-button {
     font-size: 14px;
 }
 
+ion-content {
+    margin-bottom: 56px;
+    /* Ajustar el espacio inferior para que el contenido no sea cubierto por los tabs */
+}
+
+ion-tab-bar {
+    z-index: 10;
+    /* Asegura que la barra de tabs esté en una capa superior */
+}
+
 .text-center {
     text-align: center;
 }

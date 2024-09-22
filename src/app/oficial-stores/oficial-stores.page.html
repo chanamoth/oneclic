@@ -2,14 +2,16 @@
 
 <ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
 
-  <app-shared-refresher (refreshEvent)="refreshData()"></app-shared-refresher>
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
 
   <div class="content" *ngIf="!isLoading">
 
     <swiper-container [loop]="true" [pagination]="true">
       <swiper-slide *ngFor="let banner of banners">
-        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder" loading="lazy"
-          [class.hidden]="banner.logoLoaded">
+        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
+          loading="lazy" [class.hidden]="banner.logoLoaded">
         <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
       </swiper-slide>
     </swiper-container>
@@ -43,8 +45,8 @@
               </div>
 
               <!-- Imagen de placeholder mientras se carga -->
-              <img [src]="apiService.getOptimizedImageUrl(comercio.folder, comercio.logo, 'logo')" class="store-logo-placeholder" loading="lazy"
-                [class.hidden]="comercio.logoLoaded" />
+              <img [src]="apiService.getOptimizedImageUrl(comercio.folder, comercio.logo, 'logo')"
+                class="store-logo-placeholder" loading="lazy" [class.hidden]="comercio.logoLoaded" />
 
               <!-- Imagen del comercio -->
               <img [src]="serverUrl + comercio.folder + comercio.logo" class="store-logo" loading="lazy"
@@ -63,9 +65,8 @@
       </ion-row>
     </ion-grid>
 
-    <ion-infinite-scroll (ionInfinite)="loadMore($event)">
-      <ion-infinite-scroll-content loadingSpinner="crescent"
-        loadingText="Cargando más tiendas..."></ion-infinite-scroll-content>
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)" [disabled]="noMoreData">
+      <ion-infinite-scroll-content loadingSpinner="crescent"></ion-infinite-scroll-content>
     </ion-infinite-scroll>
 
   </div>

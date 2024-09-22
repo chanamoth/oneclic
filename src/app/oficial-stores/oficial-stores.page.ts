@@ -12,6 +12,16 @@ export class OficialStoresPage implements OnInit {
 
   @ViewChild(IonContent, { static: false }) content!: IonContent;
 
+  ionViewWillEnter() {
+    this.scrollToTop();
+  }
+
+  scrollToTop() {
+    if (this.content) {
+      this.content.scrollToTop(1); // Ajusta la velocidad de scroll
+    }
+  }
+
   scrolled: boolean = false;
   comercios: any[] = []; // Todos los comercios disponibles (almacenados en memoria)
   loadedComercios: any[] = []; // Comercios que se muestran progresivamente en la vista
@@ -133,14 +143,17 @@ export class OficialStoresPage implements OnInit {
   }
 
   // Refrescar los datos de la página
-  refreshData() {
+  refreshData(event: any) {
     this.isLoading = true;
     this.currentPage = 1; // Reiniciar la página actual
     this.noMoreData = false; // Habilitar la carga de más datos
     this.loadedComercios = []; // Reiniciar los comercios cargados
+
     this.loadInitialData(); // Volver a cargar los datos
+
     setTimeout(() => {
       this.isLoading = false;
+      event.target.complete(); // Completar el refresher
     }, 1500); // Simular un tiempo de carga
   }
 }

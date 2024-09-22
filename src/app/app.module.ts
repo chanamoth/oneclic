@@ -6,10 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
-import { SharedRefresherComponent } from './shared-refresher/shared-refresher.component';
 
 @NgModule({
-  declarations: [AppComponent, SharedRefresherComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule, // Asegúrate de incluirlo aquí si se necesita
@@ -17,9 +16,6 @@ import { SharedRefresherComponent } from './shared-refresher/shared-refresher.co
     AppRoutingModule,
     HttpClientModule,
     IonicStorageModule.forRoot()
-  ],
-  exports: [
-    SharedRefresherComponent // Exportar para usar en otros lugares
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,14 +1,14 @@
-<app-shared-header title="Login"></app-shared-header>
+<app-shared-header title="Login" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content [fullscreen]="true" color="light" class="login-content ion-padding">
+<ion-content color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
   <div class="login-container">
     <ion-back-button class="back-button"></ion-back-button> <!-- Botón de retroceso -->
 
     <h1>¡Hola! 👋</h1>
-    <p class="text-center">Para continuar, por favor ingresa tus credenciales</p>
+    <p class="text-center mb-10">Para continuar, por favor ingresa tus credenciales</p>
 
     <ion-item class="input-item" [class.has-value]="email">
-      <ion-input placeholder="Correo electrónico" type="email" clear-input="true" [(ngModel)]="email"></ion-input>
+      <ion-input placeholder="Correo electrónico" type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
 
     <ion-item class="input-item" [class.has-value]="password">

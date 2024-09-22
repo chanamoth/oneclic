@@ -4,91 +4,38 @@
     align-items: center;
     justify-content: center;
     height: 100%;
-    padding: 0 20px;
 
     h1 {
-        margin-bottom: 10px;
-
         ion-icon {
-            font-size: 24px;
             margin-left: 5px;
         }
     }
-
-    p {
-        color: #555;
-        margin-bottom: 15px;
-    }
-
-    .text-center {
-        text-align: center;
-    }
-
-    ion-item.input-item {
-        width: 100%;
-        border: 1px solid #e0e0e0;
-        border-radius: 4px;
-        margin-bottom: 20px;
-        transition: border-color 0.3s ease-in-out;
-    }
-
-    ion-input {
-        font-size: 16px;
-        color: #7a7a7a;
-    }
-
-    ion-item.input-item:focus-within {
-        border: 1px solid #232323;
-        /* Borde visible en focus */
-    }
-
-    ion-item.input-item.has-value {
-        border: 1px solid #572364;
-        /* Borde visible cuando tiene valor */
-    }
-
-    ion-item.input-item::part(native) {
-        border: none;
-    }
-
+    
     ion-icon {
-        color: #7a7a7a;
+        color: var(--icon);
     }
 
     .forgot-password {
-        text-decoration: none;
-        color: #572364;
-        font-size: 14px;
-        margin-top: 10px;
+        margin-bottom: 10px;
         align-self: flex-end;
     }
 
     .login-button {
         width: 100%;
         margin-top: 12px;
-        --background: #232323;
-        color: white;
-        border: none;
+        --background: var(--primary);
+        color: var(--white);
         --border-radius: 4px;
-        font-size: 15px;
     }
 
     .social-button {
         width: 100%;
-        margin-bottom: 10px;
+        --background: var(--facebook);
+        color: var(--white);
         --border-radius: 4px;
-        --background: #4267B2;
-        --color: #ffffff;
     }
 
     .signup-text {
-        font-size: 14px;
-        margin-top: 20px;
-        color: #7a7a7a;
-
-        a {
-            text-decoration: none;
-            color: #572364;
-        }
+        color: var(--subtitle);
     }
 }

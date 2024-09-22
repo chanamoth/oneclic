@@ -8,7 +8,7 @@
 
     <swiper-container [loop]="true" [pagination]="true">
       <swiper-slide *ngFor="let banner of banners">
-        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img" loading="lazy"
+        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder" loading="lazy"
           [class.hidden]="banner.logoLoaded">
         <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
       </swiper-slide>
@@ -24,8 +24,9 @@
     <!-- Filtros: Dropdown de nombre y buscador -->
     <div class="filters">
 
-      <ion-item>
-        <ion-input placeholder="Buscar tienda..." (ionInput)="onSearch($event)"></ion-input>
+      <ion-item class="input-item">
+        <ion-input placeholder="Buscar tienda..." (ionInput)="onSearch($event)" clear-input="true"></ion-input>
+        <ion-icon name="search-outline" slot="start"></ion-icon>
       </ion-item>
 
     </div>

@@ -35,3 +35,119 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/* Root */
+:root {
+    --white: #fff;
+    --black: #000;
+    --bg: #f5f5f5;
+    --bg1: #f7f7f7;
+    --bgHover: #e0e0e0;
+    --text: #333;
+    --border: #ccc;
+    --subtitle: #555;
+    --icon: #aaa;
+    --primary: #232323;
+    --primary-dark: #1b1b1b;
+    --secondary: #572364;
+    --secondary-dark: #4a1e5a;
+    --blue: #007bff;
+    --blue-dark: #0056b3;
+    --success: #28a745;
+    --success-dark: #218838;
+    --info: #17a2b8;
+    --info-dark: #117a8b;
+    --danger: #dc3545;
+    --danger-dark: #c82333;
+    --warning: #ffc107;
+    --warning-dark: #e0a800;
+    --light-gray: #f8f9fa;
+    --gray: #6c757d;
+    --dark-gray: #343a40;
+    --gradient1: #cdffd8;
+    --gradient2: #94b9ff;
+    --google: #db4437;
+    --facebook: #4267B2;
+    --green-opherton: #28c088;
+}
+
+/* Estilos Globales */
+a {
+    text-decoration: none;
+    color: var(--secondary);
+}
+
+p {
+    color: var(--text);
+}
+
+.hidden {
+    display: none;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+.mb-10 {
+    margin-bottom: 30px;
+}
+
+ion-item.input-item {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: border-color 0.3s ease-in-out;
+    --highlight-color-focused: transparent;
+    --border-color: transparent;
+}
+
+ion-input {
+    color: var(--text);
+}
+
+ion-item.input-item:focus-within {
+    border: 1px solid var(--primary);
+}
+
+ion-item.input-item.has-value {
+    border: 1px solid var(--secondary);
+}
+
+ion-item.input-item::part(native) {
+    border: none;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.banner-img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.banner-img-placeholder {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    animation: fade 1.5s infinite ease-in-out;
+    margin-bottom: -20px;
+
+}
+
+/* Animaciones Globales */
+// Imagenes Placeholder
+@keyframes fade {
+
+    0%,
+    100% {
+        opacity: 0.4;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}

@@ -1,19 +1,9 @@
-.hidden {
-    display: none;
-}
-
 /* Contenido */
-.banner-img {
-    width: 100%;
-    height: auto;
-    border-radius: 20px;
-}
-
 .page-title {
     text-align: center;
     margin-top: 20px;
     font-size: 1.5rem;
-    color: #333;
+    color: var(--text);
 }
 
 .page-subtitle {
@@ -58,14 +48,14 @@ ion-card-content {
     position: absolute;
     top: -4px;
     left: -4px;
-    background-color: #28c088;
-    color: white;
+    background-color: var(--green-opherton);
+    color: var(--white);
     font-size: 12px;
     padding: 5px 10px;
     border-radius: 0 5px 5px 5px;
     font-weight: bold;
     z-index: 10;
-  }
+}
 
 .store-logo {
     width: 90px;
@@ -73,11 +63,12 @@ ion-card-content {
     margin-bottom: 10px;
     border-radius: 50%;
     object-fit: contain;
+    background: var(--bg1);
 }
 
 .store-logo-placeholder {
     width: 79.04px;
-    opacity: 0.5;
+    animation: fade 1.5s infinite ease-in-out;
 
 }
 

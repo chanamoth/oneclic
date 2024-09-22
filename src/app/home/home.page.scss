@@ -123,13 +123,3 @@ ion-menu::part(container) {
     /* Quitar el fondo por defecto de ion-item */
   }
 }
-
-ion-tab-bar {
-  --background: #fff; /* Fondo blanco */
-  --color-selected: #3880ff; /* Color de la tab seleccionada */
-  --color: #555; /* Color de las tabs no seleccionadas */
-}
-
-ion-tab-button {
-  font-size: 14px;
-}

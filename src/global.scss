@@ -119,6 +119,16 @@ ion-item.input-item::part(native) {
     border: none;
 }
 
+ion-tab-bar {
+    --background: var(--white);
+    --color-selected: var(--secondary);
+    --color: var(--subtitle);
+}
+
+ion-tab-button {
+    font-size: 14px;
+}
+
 .text-center {
     text-align: center;
 }

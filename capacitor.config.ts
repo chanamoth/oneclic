@@ -7,12 +7,16 @@ const config: CapacitorConfig = {
   bundledWebRuntime: false,
   plugins: {
     SplashScreen: {
-      launchShowDuration: 3000, // Duración en milisegundos (3 segundos)
+      launchShowDuration: 3000,
       launchAutoHide: true,
-      backgroundColor: "#f4f5f8", // Color de fondo
-      androidScaleType: "CENTER_CROP", // Ajusta el logo en Android
-      showSpinner: true, // Si deseas mostrar un spinner
-      spinnerColor: "#232323" // Color del spinner
+      backgroundColor: "#f4f5f8",
+      androidScaleType: "CENTER_CROP",
+      showSpinner: true,
+      spinnerColor: "#232323"
+    },
+    "StatusBar": {
+      "style": "LIGHT",
+      "backgroundColor": "#33000000"
     }
   }
 };

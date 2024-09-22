@@ -1,29 +1,37 @@
 import { Component } from '@angular/core';
-import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
-
-StatusBar.setBackgroundColor({ color: '#fff' });
+import { StatusBar, Style } from '@capacitor/status-bar';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
+
 export class AppComponent {
+
   constructor() {
     this.initializeApp();
   }
 
   initializeApp() {
-    // Ocultar el splash screen de Capacitor después de que la app esté lista
+
     SplashScreen.hide();
 
-    // Remover el splash screen personalizado
+    this.setupStatusBar();
+
     setTimeout(() => {
       const splash = document.querySelector('.custom-splash-screen');
       if (splash) {
-        splash.classList.add('hidden'); // Agregar una clase para ocultarlo con animación
+        splash.classList.add('hidden');
       }
-    }, 3000); // Tiempo en milisegundos antes de ocultar el splash personalizado
+    }, 3000);
   }
+
+  async setupStatusBar() {
+
+    await StatusBar.setOverlaysWebView({ overlay: true });
+    await StatusBar.setStyle({ style: Style.Light });
+  }
+
 }

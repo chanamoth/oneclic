@@ -47,11 +47,11 @@
       </ion-item>
 
       <!-- Opción 7 -->
-      <ion-item routerLink="/mercado-play" lines="none">
+      <!--<ion-item routerLink="/mercado-play" lines="none">
         <ion-icon name="play-outline" slot="start"></ion-icon>
         <ion-label>Mercado Play</ion-label>
         <ion-badge color="success" slot="end">GRATIS</ion-badge>
-      </ion-item>
+      </ion-item>-->
 
       <!-- Opción 8 -->
       <ion-item routerLink="/historial" lines="none">
@@ -111,12 +111,130 @@
 </ion-header>
 
 <ion-content id="main-content" [fullscreen]="true" color="light" class="ion-padding">
-  <div id="container">
-    <strong>Inicio</strong>
+
+  <!-- Slider de Banners -->
+  <swiper-container [loop]="true" [pagination]="true">
+    <swiper-slide>
+      <img src="assets/images/banner-placeholder.webp" class="banner-img">
+    </swiper-slide>
+    <swiper-slide>
+      <img src="assets/images/banner-placeholder.webp" class="banner-img">
+    </swiper-slide>
+    <swiper-slide>
+      <img src="assets/images/banner-placeholder.webp" class="banner-img">
+    </swiper-slide>
+  </swiper-container>
+
+  <!-- Swiper con Lives (Historias) -->
+  <div class="lives-container">
+
+    <div class="live-content">
+      <div class="live-story-all">
+        <img src="assets/images/live.webp">
+        <p>Ver Todos</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 1</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 2</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 3</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 4</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 5</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 6</p>
+      </div>
+      <div class="live-story">
+        <img src="assets/images/user-placeholder.webp">
+        <p>Tienda 7</p>
+      </div>
+      <!-- Agrega más ion-slide si es necesario -->
+    </div>
   </div>
+
+  <!-- Últimas Tiendas Registradas -->
+  <ion-grid>
+
+    <div class="title-card">
+      <h5>New Arrivals</h5><span routerLink="/stores-tabs">Ver todo <ion-icon
+          name="chevron-forward-outline"></ion-icon></span>
+    </div>
+
+    <ion-row>
+      <ion-col size="6">
+        <div class="tienda-card">
+          <img src="assets/images/user-placeholder.webp" alt="Tienda 1">
+          <p>Tienda 1</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="tienda-card">
+          <img src="assets/images/user-placeholder.webp" alt="Tienda 2">
+          <p>Tienda 2</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="tienda-card">
+          <img src="assets/images/user-placeholder.webp" alt="Tienda 3">
+          <p>Tienda 3</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div class="tienda-card">
+          <img src="assets/images/user-placeholder.webp" alt="Tienda 4">
+          <p>Tienda 4</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Swiper con Categorías -->
+  <hr>
+
+  <div class="title-card">
+    <h5>Categorías Destacadas</h5><span>Ver todo <ion-icon
+        name="chevron-forward-outline"></ion-icon></span>
+  </div>
+
+  <div class="categories">
+    <div class="category">
+      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
+      <p>Electrónica</p>
+    </div>
+    <div class="category">
+      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
+      <p>Electrónica</p>
+    </div>
+    <div class="category">
+      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
+      <p>Electrónica</p>
+    </div>
+    <div class="category">
+      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
+      <p>Electrónica</p>
+    </div>
+    <div class="category">
+      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
+      <p>Electrónica</p>
+    </div>
+  </div>
+
 </ion-content>
 
-<ion-tabs>
+<ion-tabs style="display: none;">
   <ion-tab-bar slot="bottom"> <!-- Aquí está el footer con los tabs -->
     <!-- Tab 1 -->
     <ion-tab-button tab="inicio" routerLink="/home">
@@ -141,6 +259,6 @@
       <ion-icon name="heart-outline"></ion-icon>
       <ion-label>Favoritos</ion-label>
     </ion-tab-button>
-    
+
   </ion-tab-bar>
 </ion-tabs>

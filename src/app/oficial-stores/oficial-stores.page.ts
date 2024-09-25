@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
+import { UserLocationService } from '../services/user-location.service';
 
 @Component({
   selector: 'app-oficial-stores',
@@ -36,7 +37,7 @@ export class OficialStoresPage implements OnInit {
   noMoreData = false; // Control para saber si ya no hay más datos para cargar
   filteredComercios: any[] = []; // Comercios filtrados por búsqueda
 
-  constructor(public apiService: ApiService) {
+  constructor(public apiService: ApiService, private userLocationService: UserLocationService) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -52,9 +53,20 @@ export class OficialStoresPage implements OnInit {
 
   // Cargar los datos iniciales de los comercios (solo una vez)
   loadInitialData() {
+
+    // Obtenemos el pais
+    const country = this.userLocationService.getUserCountry();
+    let paisIp: number;
+
+    if (!country) {
+      paisIp = 1;
+    } else {
+      paisIp = 0;
+    }
+
     this.apiService.post('search/get_rubros_app', {
-      pais: 'PE',
-      get_country_ip: 0,
+      pais: country,
+      get_country_ip: paisIp,
       get_comercios_index: 1,
       from: 0
     }).then(response => {

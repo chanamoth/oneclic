@@ -106,22 +106,22 @@
         <ion-icon slot="icon-only" name="bag-outline"></ion-icon> <!-- Ícono de carrito -->
       </ion-button>
     </ion-buttons>
-    <!--<ion-progress-bar type="indeterminate"></ion-progress-bar>-->
+    <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content id="main-content" [fullscreen]="true" color="light" class="ion-padding">
 
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+
   <!-- Slider de Banners -->
   <swiper-container [loop]="true" [pagination]="true">
-    <swiper-slide>
-      <img src="assets/images/banner-placeholder.webp" class="banner-img">
-    </swiper-slide>
-    <swiper-slide>
-      <img src="assets/images/banner-placeholder.webp" class="banner-img">
-    </swiper-slide>
-    <swiper-slide>
-      <img src="assets/images/banner-placeholder.webp" class="banner-img">
+    <swiper-slide *ngFor="let banner of banners">
+      <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
+        loading="lazy" [class.hidden]="banner.logoLoaded">
+      <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
     </swiper-slide>
   </swiper-container>
 
@@ -174,28 +174,10 @@
     </div>
 
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="6" *ngFor="let comercio of comercios">
         <div class="tienda-card">
-          <img src="assets/images/user-placeholder.webp" alt="Tienda 1">
-          <p>Tienda 1</p>
-        </div>
-      </ion-col>
-      <ion-col size="6">
-        <div class="tienda-card">
-          <img src="assets/images/user-placeholder.webp" alt="Tienda 2">
-          <p>Tienda 2</p>
-        </div>
-      </ion-col>
-      <ion-col size="6">
-        <div class="tienda-card">
-          <img src="assets/images/user-placeholder.webp" alt="Tienda 3">
-          <p>Tienda 3</p>
-        </div>
-      </ion-col>
-      <ion-col size="6">
-        <div class="tienda-card">
-          <img src="assets/images/user-placeholder.webp" alt="Tienda 4">
-          <p>Tienda 4</p>
+          <img [src]="serverUrl + comercio.logo" alt="{{ comercio.nombre }}">
+          <p>{{ comercio.nombre }}</p>
         </div>
       </ion-col>
     </ion-row>
@@ -205,60 +187,31 @@
   <hr>
 
   <div class="title-card">
-    <h5>Categorías Destacadas</h5><span>Ver todo <ion-icon
-        name="chevron-forward-outline"></ion-icon></span>
+    <h5>Categorías Destacadas</h5><span>Ver todo <ion-icon name="chevron-forward-outline"></ion-icon></span>
   </div>
 
   <div class="categories">
-    <div class="category">
-      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
-      <p>Electrónica</p>
-    </div>
-    <div class="category">
-      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
-      <p>Electrónica</p>
-    </div>
-    <div class="category">
-      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
-      <p>Electrónica</p>
-    </div>
-    <div class="category">
-      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
-      <p>Electrónica</p>
-    </div>
-    <div class="category">
-      <img src="assets/images/user-placeholder.webp" alt="Categoría 1">
-      <p>Electrónica</p>
+    <div class="category" *ngFor="let categoria of categorias">
+      <img src="{{ categoria.icono }}" alt="{{ categoria.categoria }}">
+      <p>{{ categoria.categoria }}</p>
     </div>
   </div>
 
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="dark">
+    <ion-fab-button>
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button routerLink="/stores-tabs">
+        <ion-icon name="storefront-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="cloud-upload-outline"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button>
+        <ion-icon name="pricetags-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>
-
-<ion-tabs style="display: none;">
-  <ion-tab-bar slot="bottom"> <!-- Aquí está el footer con los tabs -->
-    <!-- Tab 1 -->
-    <ion-tab-button tab="inicio" routerLink="/home">
-      <ion-icon name="home-outline"></ion-icon>
-      <ion-label>Inicio</ion-label>
-    </ion-tab-button>
-
-    <!-- Tab 2 -->
-    <ion-tab-button tab="marketplace" routerLink="/marketplace">
-      <ion-icon name="pricetag-outline"></ion-icon>
-      <ion-label>Marketplace</ion-label>
-    </ion-tab-button>
-
-    <!-- Tab 3 -->
-    <ion-tab-button tab="mis-consultas" routerLink="/messages">
-      <ion-icon name="chatbubble-outline"></ion-icon>
-      <ion-label>Consultas</ion-label>
-    </ion-tab-button>
-
-    <!-- Tab 4 -->
-    <ion-tab-button tab="favoritos" routerLink="/favorites">
-      <ion-icon name="heart-outline"></ion-icon>
-      <ion-label>Favoritos</ion-label>
-    </ion-tab-button>
-
-  </ion-tab-bar>
-</ion-tabs>

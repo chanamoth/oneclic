@@ -139,6 +139,15 @@ ion-tab-bar {
     /* Asegura que la barra de tabs esté en una capa superior */
 }
 
+ion-fab-button {
+    --background: var(--primary);
+    --border-radius: 15px;
+
+    ion-icon {
+        color: var(--white);
+    }
+}
+
 .text-center {
     text-align: center;
 }

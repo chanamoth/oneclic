@@ -15,9 +15,11 @@ export class HomePage implements OnInit {
 
   comercios: any[] = [];
   categorias: any[] = [];
+  listado: any[] = [];
   isLoading: boolean = true;
   banners: any[] = [];
   serverUrl: string;
+  productosVistos: any[] = [];
 
   constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService) {
     this.serverUrl = this.apiService.getServerUrl();
@@ -25,63 +27,59 @@ export class HomePage implements OnInit {
 
   // Método para cerrar el menú
   closeMenu() {
-    this.menu.close(); // Cerrar el menú activo
+    this.menu.close(); // Cierra el menú activo
   }
 
   ngOnInit() {
     this.loadTiendasData();
     this.loadCategoriasData();
     this.loadBannerData();
+    this.loadProductosData();
+    this.productosVistos = this.getProductosVistos();
   }
 
-  // Cargamos las tiendas
+  // Cargar datos de tiendas
   loadTiendasData() {
-
     this.isLoading = true;
 
-    // Obtenemos el pais
+    // Obtener el país del usuario
     const country = this.userLocationService.getUserCountry();
 
-    this.apiService.post('search/getLastShopsIndex', { pais: country, }).then(response => {
+    this.apiService.post('search/getLastShopsIndex', { pais: country }).then(response => {
       response.subscribe((data: any) => {
-        if (data && data.results && data.results.tiendas) {
-          this.comercios = data.results.tiendas
-          this.isLoading = false;
+        if (data?.results?.tiendas) {
+          this.comercios = data.results.tiendas;
         }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false; // Manejar el error
       });
     });
   }
 
-  // Cargamos las categorias
+  // Cargar datos de categorías
   loadCategoriasData() {
-
     this.isLoading = true;
 
-    this.apiService.post('search/get_categorias_app', { }).then(response => {
+    this.apiService.post('search/get_categorias_app', {}).then(response => {
       response.subscribe((data: any) => {
-        if (data && data.results && data.results.categorias) {
+        if (data?.results?.categorias) {
           this.categorias = data.results.categorias;
-          this.isLoading = false;
         }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false; // Manejar el error
       });
     });
-
   }
 
-  // Cargamos los banners
+  // Cargar datos de banners
   loadBannerData() {
-
     this.isLoading = true;
 
-    // Obtenemos el pais
+    // Obtener el país del usuario
     const country = this.userLocationService.getUserCountry();
-    let paisIp: number;
-
-    if (!country) {
-      paisIp = 1;
-    } else {
-      paisIp = 0;
-    }
+    const paisIp = country ? 0 : 1;
 
     this.apiService.post('search/get_rubros_app', {
       pais: country,
@@ -90,13 +88,40 @@ export class HomePage implements OnInit {
       from: 0
     }).then(response => {
       response.subscribe((data: any) => {
-        if (data && data.banners) {
-          this.banners = data.banners || [];
-          this.isLoading = false;
+        if (data?.banners) {
+          this.banners = data.banners;
         }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false; // Manejar el error
       });
     });
+  }
 
+  // Cargar datos de productos
+  loadProductosData() {
+    this.isLoading = true;
+
+    // Obtener el país del usuario
+    const country = this.userLocationService.getUserCountry();
+
+    this.apiService.post('search/fullsearch', { pais: country, from: 0, rows: 10 }).then(response => {
+      response.subscribe((data: any) => {
+        if (data?.results?.listado) {
+          // Ordenar los datos por idarticulo en orden descendente
+          this.listado = data.results.listado.sort((a: any, b: any) => b.idarticulo - a.idarticulo);
+        }
+        this.isLoading = false;
+      }, () => {
+        this.isLoading = false; // Manejar el error
+      });
+    });
+  }
+
+  // 10 ultimos productos recien vistos
+  getProductosVistos() {
+    const key = 'productos_vistos';
+    return JSON.parse(localStorage.getItem(key) || '[]');
   }
 
   // Refrescar los datos de la página
@@ -108,5 +133,4 @@ export class HomePage implements OnInit {
       event.target.complete(); // Completar el refresher
     }, 1500); // Simular un tiempo de carga
   }
-
 }

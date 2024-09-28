@@ -169,7 +169,7 @@
   <ion-grid>
 
     <div class="title-card">
-      <h5>New Arrivals</h5><span routerLink="/stores-tabs">Ver todo <ion-icon
+      <h5>New Arrivals</h5><span routerLink="/stores-tabs">Ver Todo <ion-icon
           name="chevron-forward-outline"></ion-icon></span>
     </div>
 
@@ -187,7 +187,7 @@
   <hr>
 
   <div class="title-card">
-    <h5>Categorías Destacadas</h5><span>Ver todo <ion-icon name="chevron-forward-outline"></ion-icon></span>
+    <h5>Categorías Destacadas</h5><span>Ver Todo <ion-icon name="chevron-forward-outline"></ion-icon></span>
   </div>
 
   <div class="categories">
@@ -197,21 +197,40 @@
     </div>
   </div>
 
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" color="dark">
-    <ion-fab-button>
-      <ion-icon name="add-outline"></ion-icon>
-    </ion-fab-button>
-    <ion-fab-list side="top">
-      <ion-fab-button routerLink="/stores-tabs">
-        <ion-icon name="storefront-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-button>
-        <ion-icon name="pricetags-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-fab-list>
-  </ion-fab>
+  <!-- Slider de Productos Recién Agregados -->
+  <div class="title-card">
+    <h5>Recién Agregados</h5><span>Ver Todo <ion-icon name="chevron-forward-outline"></ion-icon></span>
+  </div>
+
+  <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true">
+    <swiper-slide *ngFor="let producto of listado">
+      <div class="product-card">
+        <img [src]="serverUrl + producto.folder + producto.foto_principal" alt="{{ producto.titulo }}">
+        <h6>{{ producto.titulo }}</h6>
+        <p>{{ producto.categoria }}</p>
+        <p>{{ producto.moneda }} {{ producto.precio }}</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
+  <!-- Slider de Vistos Recientemente -->
+  <div class="title-card">
+    <h5>Recién Vistos</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>
+  </div>
+
+  <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true">
+    <swiper-slide *ngFor="let articulo of productosVistos">
+      <div class="product-card">
+        <img [src]="serverUrl + articulo.folder + articulo.foto_principal" alt="{{ articulo.titulo }}">
+        <h6>{{ articulo.titulo }}</h6>
+        <p>{{ articulo.categoria }}</p>
+        <p>{{ articulo.moneda }} {{ articulo.precio }}</p>
+      </div>
+    </swiper-slide>
+  </swiper-container>
+
+  <div *ngIf="productosVistos.length === 0">
+    <p>No hay productos recientes.</p>
+  </div>
 
 </ion-content>

@@ -98,7 +98,7 @@
     </ion-buttons>
 
     <ion-searchbar placeholder="Buscar en OneClic..." debounce="500" showCancelButton="never"
-      search-icon="search-outline" slot="primary" class="custom-searchbar">
+      search-icon="search-outline" slot="primary" class="custom-searchbar" id="open-modal" expand="block">
     </ion-searchbar>
 
     <ion-buttons slot="end">
@@ -187,7 +187,8 @@
   <hr>
 
   <div class="title-card">
-    <h5>Categorías Destacadas</h5><span routerLink="/categories">Ver Todo <ion-icon name="chevron-forward-outline"></ion-icon></span>
+    <h5>Categorías Destacadas</h5><span routerLink="/categories">Ver Todo <ion-icon
+        name="chevron-forward-outline"></ion-icon></span>
   </div>
 
   <div class="categories">
@@ -229,8 +230,67 @@
     </swiper-slide>
   </swiper-container>
 
-  <div *ngIf="productosVistos.length === 0">
-    <p>No hay productos recientes.</p>
-  </div>
+  <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.7" [breakpoints]="[0, 0.9, 1, 0.8]">
+    <ng-template>
+      <ion-content>
+        <ion-searchbar placeholder="Buscar ofertas..." (click)="modal.setCurrentBreakpoint(0.8)"></ion-searchbar>
+
+        <!-- Filtrar por Categorías -->
+        <ion-item lines="none">
+          <ion-label>Filtrar por categorías</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-select placeholder="Categoría: Todas las Categorías">
+            <ion-select-option *ngFor="let categoria of categorias">{{ categoria.categoria }}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <!-- Filtrar por Precio -->
+        <ion-item lines="none">
+          <ion-label>Filtrar por precio</ion-label>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-range min="0" max="5000" pin="true">
+            <ion-label slot="start">0</ion-label>
+            <ion-label slot="end">5000</ion-label>
+          </ion-range>
+        </ion-item>
+
+        <!-- Filtrar por Condición -->
+        <ion-item lines="none">
+          <ion-label>Filtrar por condición</ion-label>
+        </ion-item>
+        <ion-list lines="none">
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Usado</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Nuevo</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Acepta Permuta</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Urge en venderlo</ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-label>Realiza envíos</ion-label>
+          </ion-item>
+        </ion-list>
+
+        <!-- Botones para aplicar o cerrar filtros -->
+        <div class="filter-buttons">
+          <ion-button expand="block" color="default" (click)="closeModal()">Cerrar Filtros</ion-button>
+          <ion-button expand="block" color="primary">Aplicar Filtros</ion-button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 
 </ion-content>

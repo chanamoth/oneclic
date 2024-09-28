@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -21,7 +21,7 @@ export class HomePage implements OnInit {
   serverUrl: string;
   productosVistos: any[] = [];
 
-  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService) {
+  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -122,6 +122,10 @@ export class HomePage implements OnInit {
   getProductosVistos() {
     const key = 'productos_vistos';
     return JSON.parse(localStorage.getItem(key) || '[]');
+  }
+
+  closeModal() {
+    this.modalController.dismiss(); // Cierra el modal
   }
 
   // Refrescar los datos de la página

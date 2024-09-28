@@ -1,0 +1,14 @@
+<app-shared-header title="Categorías" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
+
+<ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
+  <div class="category-grid">
+    <ion-card *ngFor="let categoria of categorias" class="category-card">
+      <div class="category-image-container">
+        <img [src]="categoria.icono" class="category-image" />
+      </div>
+      <ion-card-content>
+        <ion-label class="category-label">{{ categoria.categoria }}</ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

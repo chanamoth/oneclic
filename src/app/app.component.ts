@@ -29,13 +29,13 @@ export class AppComponent {
     // Ocultar el splash screen de Capacitor después de que la app esté lista
     SplashScreen.hide();
 
-    // Remover el splash screen personalizado
+    // Remover el splash screen personalizado después de un tiempo
     setTimeout(() => {
       const splash = document.querySelector('.custom-splash-screen');
       if (splash) {
-        splash.classList.add('hidden');
+        splash.classList.add('hidden'); // Añade la clase para ocultar el splash
       }
-    }, 3000);
+    }, 3000); // 3 segundos antes de ocultar el splash screen
 
     // Obtener la IP y el país del usuario
     this.getLocation();

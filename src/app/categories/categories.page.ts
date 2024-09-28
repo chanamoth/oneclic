@@ -55,4 +55,14 @@ export class CategoriesPage implements OnInit {
     });
   }
 
+  // Refrescar los datos de la página
+  refreshData(event: any) {
+    this.isLoading = true;
+    this.loadInitialData();
+    setTimeout(() => {
+      this.isLoading = false;
+      event.target.complete(); // Completar el refresher
+    }, 1500); // Simular un tiempo de carga
+  }
+
 }

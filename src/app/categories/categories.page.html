@@ -1,6 +1,11 @@
 <app-shared-header title="Categorías" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
 <ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+
   <div class="category-grid">
     <ion-card *ngFor="let categoria of categorias" class="category-card">
       <div class="category-image-container">

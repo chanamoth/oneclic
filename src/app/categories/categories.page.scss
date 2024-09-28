@@ -33,11 +33,13 @@
     justify-content: center;
     align-items: center;
     height: 75px;
-    background: #f9f9f9;
 }
 
 .category-image {
     object-fit: contain;
+    border: 1px solid #f1f1f1;
+    padding: 10px;
+    border-radius: 8px;
 }
 
 .category-label {

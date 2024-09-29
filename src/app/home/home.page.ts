@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonContent } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
-import { MenuController, ModalController } from '@ionic/angular';
+import { IonContent, MenuController, ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +19,9 @@ export class HomePage implements OnInit {
   banners: any[] = [];
   serverUrl: string;
   productosVistos: any[] = [];
+  /* Skeleton */
+  arrayLive = new Array(10);
+  arraArrivals = new Array(4);
 
   constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController) {
     this.serverUrl = this.apiService.getServerUrl();

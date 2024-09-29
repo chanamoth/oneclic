@@ -36,6 +36,7 @@ export class OficialStoresPage implements OnInit {
   searchTerm: string = ''; // Guarda el término de búsqueda actual
   noMoreData = false; // Control para saber si ya no hay más datos para cargar
   filteredComercios: any[] = []; // Comercios filtrados por búsqueda
+  arrayDemo = new Array(10);
 
   constructor(public apiService: ApiService, private userLocationService: UserLocationService) {
     this.serverUrl = this.apiService.getServerUrl();

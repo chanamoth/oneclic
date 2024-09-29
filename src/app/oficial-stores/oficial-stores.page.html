@@ -6,9 +6,17 @@
     <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
-  <div class="content" *ngIf="!isLoading">
+  <div class="content">
 
-    <swiper-container [loop]="true" [pagination]="true">
+    <!-- Preload -->
+    <swiper-container [loop]="true" [pagination]="true" *ngIf="isLoading">
+      <swiper-slide>
+        <img src="assets/images/banner-placeholder.webp" class="banner-img">
+      </swiper-slide>
+    </swiper-container>
+
+    <!-- Cargado -->
+    <swiper-container [loop]="true" [pagination]="true" *ngIf="!isLoading">
       <swiper-slide *ngFor="let banner of banners">
         <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
           loading="lazy" [class.hidden]="banner.logoLoaded">
@@ -16,25 +24,52 @@
       </swiper-slide>
     </swiper-container>
 
-    <!-- Título principal -->
-    <h2 class="page-title">Tiendas Oficiales</h2>
-    <p class="page-subtitle">Tus marcas preferidas ya están en OneClic</p>
+    <!-- Preload -->
+    <div class="ph-row" style="justify-content: center; margin-top: 20px; margin-bottom: 15px;" *ngIf="isLoading">
+      <div class="ph-col-6 big"></div>
+      <div class="ph-col-10"></div>
+    </div>
+    <!-- Cargado -->
+    <div *ngIf="!isLoading">
+      <h2 class="page-title">Tiendas Oficiales</h2>
+      <p class="page-subtitle">Tus marcas preferidas ya están en OneClic</p>
+    </div>
 
     <ion-toast [isOpen]="showAlert" trigger="open-toast" message="No se encontraron tiendas."
       [duration]="5000"></ion-toast>
 
-    <!-- Filtros: Dropdown de nombre y buscador -->
-    <div class="filters">
+    <!-- Preload -->
+    <div class="ph-row" style="padding: 0 6px; margin-bottom: 10px;" *ngIf="isLoading">
+      <div class="ph-col-12" style="height: 48px; border-radius: 4px;"></div>
+    </div>
 
+    <!-- Cargado -->
+    <div class="filters" *ngIf="!isLoading">
       <ion-item class="input-item">
         <ion-input placeholder="Buscar tienda..." (ionInput)="onSearch($event)" clear-input="true"></ion-input>
         <ion-icon name="search-outline" slot="start"></ion-icon>
       </ion-item>
-
     </div>
 
-    <!-- Cuadrícula de tiendas destacadas -->
-    <ion-grid>
+    <!-- Preload -->
+    <ion-grid *ngIf="isLoading">
+      <ion-row>
+        <ion-col size="6" *ngFor="let comercio of arrayDemo">
+          <ion-card class="store-card">
+            <ion-card-content class="ph-row" style="justify-content: center;">
+              <div class="ph-picture store-logo" style="width: 90px; height: 90px;"></div>
+              <br>
+              <div class="ph-col-8"></div>
+              <div class="ph-col-6"></div>
+              <br>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Cargado -->
+    <ion-grid *ngIf="!isLoading">
       <ion-row>
         <ion-col size="6" *ngFor="let comercio of loadedComercios">
           <ion-card class="store-card">
@@ -45,8 +80,9 @@
               </div>
 
               <!-- Imagen de placeholder mientras se carga -->
-              <img [src]="apiService.getOptimizedImageUrl(comercio.folder, comercio.logo, 'logo')"
-                class="store-logo-placeholder" loading="lazy" [class.hidden]="comercio.logoLoaded" />
+              <div class="ph-row" style="justify-content: center; margin-bottom: 0;" [class.hidden]="comercio.logoLoaded">
+                <div class="ph-picture store-logo" style="width: 90px; height: 90px; border: 1px solid #f1f1f1;"></div>
+              </div>
 
               <!-- Imagen del comercio -->
               <img [src]="serverUrl + comercio.folder + comercio.logo" class="store-logo" loading="lazy"
@@ -58,7 +94,7 @@
               <br>
               <ion-label class="store-name">{{ comercio.nombre }}</ion-label>
               <br>
-              <!--<small>{{comercio.ciudad}} {{comercio.provincia}} - {{comercio.pais}}</small>-->
+
             </ion-card-content>
           </ion-card>
         </ion-col>

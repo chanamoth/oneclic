@@ -1,12 +1,31 @@
 <app-shared-header title="Categorías" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
+<ion-content [fullscreen]="true" color="light" class="ion-padding" (ionScroll)="onScroll($event)"
+  scrollEvents="true">
 
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
-  <div class="category-grid">
+  <!-- Preload -->
+  <div class="category-grid" *ngIf="isLoading">
+    <ion-card class="category-card" *ngFor="let item of arrayDemo">
+      <div class="category-image-container ph-row">
+        <div class="ph-picture category-image" style="height: 55px; width: 55px; margin-bottom: 0;"></div>
+      </div>
+      <ion-card-content>
+        <ion-label class="category-label">
+          <div class="ph-row" style="margin-bottom: 0; justify-content: center;">
+            <div class="ph-col-12"></div>
+            <div class="ph-col-8"></div>
+          </div>
+        </ion-label>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Cargado -->
+  <div class="category-grid" *ngIf="!isLoading">
     <ion-card *ngFor="let categoria of categorias" class="category-card">
       <div class="category-image-container">
         <img [src]="categoria.icono" class="category-image" />

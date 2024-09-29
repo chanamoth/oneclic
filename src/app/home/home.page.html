@@ -116,119 +116,179 @@
     <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
-  <!-- Slider de Banners -->
-  <swiper-container [loop]="true" [pagination]="true">
-    <swiper-slide *ngFor="let banner of banners">
-      <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
-        loading="lazy" [class.hidden]="banner.logoLoaded">
-      <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
-    </swiper-slide>
-  </swiper-container>
+  <!-- Banners (sección inicial) -->
+  <div id="banner-section">
+    <!-- Preload -->
+    <swiper-container [loop]="true" [pagination]="true" *ngIf="isLoading">
+      <swiper-slide>
+        <img src="assets/images/banner-placeholder.webp" class="banner-img">
+      </swiper-slide>
+    </swiper-container>
 
-  <!-- Swiper con Lives (Historias) -->
-  <div class="lives-container">
+    <!-- Cargado -->
+    <swiper-container [loop]="true" [pagination]="true" *ngIf="!isLoading">
+      <swiper-slide *ngFor="let banner of banners">
+        <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
+          loading="lazy" [class.hidden]="banner.logoLoaded">
+        <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
+      </swiper-slide>
+    </swiper-container>
+  </div>
 
-    <div class="live-content">
-      <div class="live-story-all">
-        <img src="assets/images/live.webp">
-        <p>Ver Todos</p>
+  <!-- Live Stories -->
+  <div id="live-section">
+    <!-- Preload -->
+    <div class="lives-container" *ngIf="isLoading">
+      <div class="live-content">
+        <div class="live-story-all ph-row" *ngFor="let item of arrayLive">
+          <div class="ph-picture" style="width: 60px; height: 60px; border-radius: 50%; margin-top: 5px; border: 2px solid var(--secondary);
+      "></div>
+          <div class="ph-col-6" style="flex: none; width: 100%;"></div>
+        </div>
       </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 1</p>
+    </div>
+
+    <!-- Cargado -->
+    <div class="lives-container" *ngIf="!isLoading">
+      <div class="live-content">
+        <div class="live-story-all">
+          <img src="assets/images/live.webp">
+          <p>Ver Todos</p>
+        </div>
+        <div class="live-story" *ngFor="let item of arrayLive">
+          <img src="assets/images/user-placeholder.webp">
+          <p>Tienda</p>
+        </div>
       </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 2</p>
-      </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 3</p>
-      </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 4</p>
-      </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 5</p>
-      </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 6</p>
-      </div>
-      <div class="live-story">
-        <img src="assets/images/user-placeholder.webp">
-        <p>Tienda 7</p>
-      </div>
-      <!-- Agrega más ion-slide si es necesario -->
     </div>
   </div>
 
-  <!-- Últimas Tiendas Registradas -->
-  <ion-grid>
+  <!-- New Arrivals -->
+  <div id="new-arrivals-section" *ngIf="comercios.length > 0">
+    <ion-grid>
+
+      <div class="title-card">
+        <h5>New Arrivals</h5><span routerLink="/stores-tabs">Ver Todo <ion-icon
+            name="chevron-forward-outline"></ion-icon></span>
+      </div>
+
+      <!-- Preload -->
+      <ion-row *ngIf="isLoading">
+        <ion-col size="6" *ngFor="let item of arraArrivals">
+          <div class="tienda-card ph-row" style="justify-content: center;">
+            <div class="ph-picture" style="height: 100px; width: 100px; border-radius: 8px; margin-top: 15px;"></div>
+            <div class="ph-col-8" style="margin-top: 10px;"></div>
+            <div class="ph-col-6" style="margin-bottom: 14px;"></div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <!-- Cargado -->
+      <ion-row *ngIf="!isLoading">
+        <ion-col size="6" *ngFor="let comercio of comercios">
+          <div class="tienda-card">
+            <img [src]="serverUrl + comercio.logo" alt="{{ comercio.nombre }}">
+            <p>{{ comercio.nombre }}</p>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </div>
+
+  <!-- Categorías -->
+  <div id="categories-section" *ngIf="categorias.length > 0">
+    <!-- Swiper con Categorías -->
+    <hr>
 
     <div class="title-card">
-      <h5>New Arrivals</h5><span routerLink="/stores-tabs">Ver Todo <ion-icon
+      <h5>Categorías Destacadas</h5><span routerLink="/categories">Ver Todo <ion-icon
           name="chevron-forward-outline"></ion-icon></span>
     </div>
 
-    <ion-row>
-      <ion-col size="6" *ngFor="let comercio of comercios">
-        <div class="tienda-card">
-          <img [src]="serverUrl + comercio.logo" alt="{{ comercio.nombre }}">
-          <p>{{ comercio.nombre }}</p>
+    <!-- Preload -->
+    <div class="categories" *ngIf="isLoading">
+      <div class="category" *ngFor="let item of arrayLive">
+        <div class="ph-row" style="justify-content: center;">
+          <div class="ph-picture" style="height: 50px; width: 50px;"></div>
+          <div class="ph-col-12" style="margin-bottom: 3px;"></div>
+          <div class="ph-col-6" style="margin-bottom: 0;"></div>
         </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
+    </div>
 
-  <!-- Swiper con Categorías -->
-  <hr>
-
-  <div class="title-card">
-    <h5>Categorías Destacadas</h5><span routerLink="/categories">Ver Todo <ion-icon
-        name="chevron-forward-outline"></ion-icon></span>
-  </div>
-
-  <div class="categories">
-    <div class="category" *ngFor="let categoria of categorias">
-      <img src="{{ categoria.icono }}" alt="{{ categoria.categoria }}">
-      <p>{{ categoria.categoria }}</p>
+    <!-- Cargado -->
+    <div class="categories" *ngIf="!isLoading">
+      <div class="category" *ngFor="let categoria of categorias">
+        <img src="{{ categoria.icono }}" alt="{{ categoria.categoria }}">
+        <p>{{ categoria.categoria }}</p>
+      </div>
     </div>
   </div>
 
-  <!-- Slider de Productos Recién Agregados -->
-  <div class="title-card">
-    <h5>Recién Agregados</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>
+  <!-- Recien Agregados -->
+  <div id="recent-added-section" *ngIf="listado.length > 0">
+    <!-- Slider de Productos Recién Agregados -->
+    <div class="title-card">
+      <h5>Recién Agregados</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>
+    </div>
+
+    <!-- Preload -->
+    <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true" *ngIf="isLoading">
+      <swiper-slide *ngFor="let item of arrayLive">
+        <div class="product-card ph-row" style="justify-content: center; align-items: center;">
+          <div class="ph-picture" style="height: 155px; width: 120px; border-radius: 5px;"></div>
+          <div class="ph-col-12" style="flex: none; width: 100%;"></div>
+          <div class="ph-col-8" style="flex: none; width: 80%;"></div>
+          <div class="ph-col-6" style="flex: none; width: 60%;"></div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+
+    <!-- Cargado -->
+    <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true" *ngIf="!isLoading">
+      <swiper-slide *ngFor="let producto of listado">
+        <div class="product-card">
+          <img [src]="serverUrl + producto.folder + producto.foto_principal" alt="{{ producto.titulo }}">
+          <h6>{{ producto.titulo }}</h6>
+          <p>{{ producto.categoria }}</p>
+          <p>{{ producto.moneda }} {{ producto.precio }}</p>
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
 
-  <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true">
-    <swiper-slide *ngFor="let producto of listado">
-      <div class="product-card">
-        <img [src]="serverUrl + producto.folder + producto.foto_principal" alt="{{ producto.titulo }}">
-        <h6>{{ producto.titulo }}</h6>
-        <p>{{ producto.categoria }}</p>
-        <p>{{ producto.moneda }} {{ producto.precio }}</p>
-      </div>
-    </swiper-slide>
-  </swiper-container>
+  <!-- Recien Vistos -->
+  <div id="recent-views-section" *ngIf="productosVistos.length > 0">
+    <!-- Slider de Vistos Recientemente -->
+    <div class="title-card">
+      <h5>Recién Vistos</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>
+    </div>
 
-  <!-- Slider de Vistos Recientemente -->
-  <div class="title-card">
-    <h5>Recién Vistos</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>
+    <!-- Preload -->
+    <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true" *ngIf="isLoading">
+      <swiper-slide *ngFor="let item of arrayLive">
+        <div class="product-card ph-row" style="justify-content: center; align-items: center;">
+          <div class="ph-picture" style="height: 155px; width: 120px; border-radius: 5px;"></div>
+          <div class="ph-col-12" style="flex: none; width: 100%;"></div>
+          <div class="ph-col-8" style="flex: none; width: 80%;"></div>
+          <div class="ph-col-6" style="flex: none; width: 60%;"></div>
+        </div>
+      </swiper-slide>
+    </swiper-container>
+
+    <!-- Cargado -->
+    <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true" *ngIf="!isLoading">
+      <swiper-slide *ngFor="let articulo of productosVistos">
+        <div class="product-card">
+          <img [src]="serverUrl + articulo.folder + articulo.foto_principal" alt="{{ articulo.titulo }}">
+          <h6>{{ articulo.titulo }}</h6>
+          <p>{{ articulo.categoria }}</p>
+          <p>{{ articulo.moneda }} {{ articulo.precio }}</p>
+        </div>
+      </swiper-slide>
+    </swiper-container>
   </div>
-
-  <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true">
-    <swiper-slide *ngFor="let articulo of productosVistos">
-      <div class="product-card">
-        <img [src]="serverUrl + articulo.folder + articulo.foto_principal" alt="{{ articulo.titulo }}">
-        <h6>{{ articulo.titulo }}</h6>
-        <p>{{ articulo.categoria }}</p>
-        <p>{{ articulo.moneda }} {{ articulo.precio }}</p>
-      </div>
-    </swiper-slide>
-  </swiper-container>
 
   <ion-modal #modal trigger="open-modal" [initialBreakpoint]="0.7" [breakpoints]="[0, 0.9, 1, 0.8]">
     <ng-template>
@@ -286,11 +346,10 @@
         <!-- Botones para aplicar o cerrar filtros -->
         <div class="filter-buttons">
           <ion-button expand="block" color="default" (click)="closeModal()">Cerrar Filtros</ion-button>
-          <ion-button expand="block" color="primary">Aplicar Filtros</ion-button>
+          <ion-button expand="block" color="dark">Aplicar Filtros</ion-button>
         </div>
       </ion-content>
     </ng-template>
   </ion-modal>
-
 
 </ion-content>

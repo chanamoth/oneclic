@@ -25,6 +25,7 @@ export class CategoriesPage implements OnInit {
   isLoading: boolean = true;
   serverUrl: string;
   categorias: any[] = [];
+  arrayDemo = new Array(20);
 
   constructor(public apiService: ApiService) {
     this.serverUrl = this.apiService.getServerUrl();

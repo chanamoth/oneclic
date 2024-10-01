@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
 import { IonContent, MenuController, ModalController } from '@ionic/angular';
+import { ConnectionService } from '../services/connection.service';
 
 @Component({
   selector: 'app-home',
@@ -22,8 +23,10 @@ export class HomePage implements OnInit {
   /* Skeleton */
   arrayLive = new Array(10);
   arraArrivals = new Array(4);
+  /* */
+  isOnline: boolean = true;
 
-  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController) {
+  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController, private connectionService: ConnectionService, private cd: ChangeDetectorRef) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -33,11 +36,23 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.isOnline = false;
+    this.checkNetworkStatus();
     this.loadTiendasData();
     this.loadCategoriasData();
     this.loadBannerData();
     this.loadProductosData();
     this.productosVistos = this.getProductosVistos();
+  }
+
+  //
+  checkNetworkStatus() {
+    this.connectionService.getNetworkStatus().subscribe((status: boolean) => {
+      this.isOnline = status;
+      this.isLoading = false;
+      // Forzar actualización del estado si no se refleja automáticamente
+      this.cd.detectChanges();
+    });
   }
 
   // Cargar datos de tiendas
@@ -132,11 +147,16 @@ export class HomePage implements OnInit {
 
   // Refrescar los datos de la página
   refreshData(event: any) {
-    this.isLoading = true;
-    this.ngOnInit();
-    setTimeout(() => {
-      this.isLoading = false;
-      event.target.complete(); // Completar el refresher
-    }, 1500); // Simular un tiempo de carga
+    if (this.isOnline) {
+      this.isLoading = true;
+      this.ngOnInit();
+      setTimeout(() => {
+        this.isLoading = false;
+        event.target.complete(); // Completar el refresher
+      }, 1500); // Simular un tiempo de carga
+    } else {
+      event.target.complete(); // Completar el refresher incluso si no hay conexión
+    }
   }
+
 }

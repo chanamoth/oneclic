@@ -29,6 +29,8 @@
     "@capacitor/keyboard": "6.0.2",
     "@capacitor/splash-screen": "^6.0.2",
     "@capacitor/status-bar": "^6.0.1",
+    "@ionic-native/core": "^5.36.0",
+    "@ionic-native/network": "^5.36.0",
     "@ionic/angular": "^8.0.0",
     "@ionic/storage-angular": "^4.0.0",
     "cordova-sqlite-storage": "^6.1.0",

@@ -171,6 +171,34 @@ ion-fab-button {
     margin-bottom: 0;
 }
 
+.no-connection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: calc(100vh - 90px);
+}
+
+.no-connection img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.no-connection h1 {
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.no-connection p {
+    color: var(--text);
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
 /* Animaciones Globales */
 // Imagenes Placeholder
 @keyframes fade {

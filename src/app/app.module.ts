@@ -6,9 +6,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { Network } from '@ionic-native/network/ngx';
+import { OfflineMessageComponent } from './shared/offline-message/offline-message.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, OfflineMessageComponent],
   imports: [
     BrowserModule,
     ReactiveFormsModule, // Asegúrate de incluirlo aquí si se necesita
@@ -17,7 +19,7 @@ import { IonicStorageModule } from '@ionic/storage-angular';
     HttpClientModule,
     IonicStorageModule.forRoot()
   ],
-  providers: [],
+  providers: [Network],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

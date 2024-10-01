@@ -1,0 +1,4 @@
+<div class="offline-message" *ngIf="!isOnline">
+  <p>No tienes conexión a Internet</p>
+  <ion-button (click)="onRetry.emit()">Reintentar</ion-button>
+</div>

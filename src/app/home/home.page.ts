@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
 import { IonContent, MenuController, ModalController } from '@ionic/angular';
@@ -26,7 +27,7 @@ export class HomePage implements OnInit {
   /* */
   isOnline: boolean = true;
 
-  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController, private connectionService: ConnectionService, private cd: ChangeDetectorRef) {
+  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController, private connectionService: ConnectionService, private cd: ChangeDetectorRef, private router: Router) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -157,6 +158,10 @@ export class HomePage implements OnInit {
     } else {
       event.target.complete(); // Completar el refresher incluso si no hay conexión
     }
+  }
+
+  goToPage(page: string) {
+    this.router.navigate([page]);
   }
 
 }

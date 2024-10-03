@@ -318,3 +318,23 @@ ion-modal {
   }
 
 }
+
+/**/
+ion-tab-bar {
+  background-color: var(--white); /* Color de fondo del footer */
+  --color-selected: var(--primary); /* Color del ícono seleccionado */
+}
+
+ion-fab-button {
+  --size: 60px; /* Tamaño más grande del botón central */
+  --border-radius: 50%;
+  --background: var(--primary);
+}
+
+ion-tab-button {
+  --color-selected: var(--primary);
+}
+
+ion-tab-button ion-label {
+  font-size: 12px; /* Ajusta el tamaño del texto */
+}

@@ -1,28 +1,28 @@
 <app-shared-header title="Login" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content color="light" class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
+<ion-content class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
   <div class="login-container">
     <ion-back-button class="back-button"></ion-back-button> <!-- Botón de retroceso -->
 
     <h1>¡Hola! 👋</h1>
     <p class="text-center mb-10">Para continuar, por favor ingresa tus credenciales</p>
 
-    <ion-item class="input-item" [class.has-value]="email">
+    <ion-item class="input-item">
       <ion-input placeholder="Correo electrónico" type="email" [(ngModel)]="email"></ion-input>
     </ion-item>
 
-    <ion-item class="input-item" [class.has-value]="password">
+    <ion-item class="input-item">
       <ion-input placeholder="Contraseña" [type]="passwordType" [(ngModel)]="password"></ion-input>
-      <ion-icon slot="end" [name]="passwordIcon" (click)="togglePasswordVisibility()"></ion-icon>
+      <ion-icon slot="end" [name]="passwordIcon" (click)="togglePasswordVisibility()" class="icon-input"></ion-icon>
     </ion-item>
 
     <a class="forgot-password" href="#">¿Olvidaste tu contraseña?</a>
 
-    <ion-button expand="block" class="login-button">Iniciar sesión</ion-button>
+    <ion-button expand="block" color="dark" shape="round" class="login-button" size="large">Iniciar sesión</ion-button>
 
     <p class="login-text">O inicia sesión con</p>
 
-    <ion-button expand="block" fill="outline" class="social-button facebook-button">
+    <ion-button expand="block" fill="outline" class="social-button" shape="round" size="large">
       Facebook
     </ion-button>
 

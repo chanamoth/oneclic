@@ -73,8 +73,9 @@
 
 /* Estilos Globales */
 a {
-    text-decoration: none;
-    color: var(--secondary);
+    //text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: 400;
 }
 
 p {
@@ -89,7 +90,7 @@ p {
     margin-top: 10px;
 }
 
-.mb-10 {
+.mb-30 {
     margin-bottom: 30px;
 }
 
@@ -109,14 +110,6 @@ ion-input {
 
 ion-item.input-item:focus-within {
     border: 1px solid var(--primary);
-}
-
-ion-item.input-item.has-value {
-    border: 1px solid var(--secondary);
-}
-
-ion-item.input-item::part(native) {
-    border: none;
 }
 
 ion-tab-bar {
@@ -199,6 +192,18 @@ ion-fab-button {
     margin-bottom: 20px;
 }
 
+.input-icon {
+
+    width: 100%;
+    margin-bottom: 25px;
+
+    ion-icon {
+        color: var(--icon);
+        font-size: 20px;
+    }
+
+}
+
 /* Animaciones Globales */
 // Imagenes Placeholder
 @keyframes fade {
@@ -211,4 +216,5 @@ ion-fab-button {
     50% {
         opacity: 1;
     }
+
 }

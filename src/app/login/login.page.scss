@@ -23,19 +23,14 @@
     .login-button {
         width: 100%;
         margin-top: 12px;
-        --background: var(--primary);
-        color: var(--white);
-        --border-radius: 4px;
     }
 
     .social-button {
         width: 100%;
-        --background: var(--facebook);
-        color: var(--white);
-        --border-radius: 4px;
     }
 
     .signup-text {
         color: var(--subtitle);
     }
+    
 }

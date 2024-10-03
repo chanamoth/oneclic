@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { register } from 'swiper/element/bundle';
 import { IpService } from './services/ip.service'; // Servicio para obtener la IP
 import { GeolocationService } from './services/geolocation.service'; // Servicio para obtener la geolocalización
 import { UserLocationService } from './services/user-location.service'; // Servicio compartido para almacenar IP y país
+import { ScreenOrientation } from '@capacitor/screen-orientation';
+import { Storage } from '@ionic/storage-angular';  // Importar Storage
 
 StatusBar.setStyle({ style: Style.Light });
 StatusBar.setBackgroundColor({ color: '#f4f5f8' });
@@ -20,12 +23,17 @@ export class AppComponent {
   constructor(
     private ipService: IpService,
     private geoService: GeolocationService,
-    private userLocationService: UserLocationService
+    private userLocationService: UserLocationService,
+    private platform: Platform,
+    private storage: Storage  // Añadir Storage aquí
   ) {
     this.initializeApp();
   }
 
-  initializeApp() {
+  async initializeApp() {
+    // Inicializar el almacenamiento antes de hacer cualquier cosa con él
+    await this.storage.create();
+
     // Ocultar el splash screen de Capacitor después de que la app esté lista
     SplashScreen.hide();
 
@@ -39,6 +47,11 @@ export class AppComponent {
 
     // Obtener la IP y el país del usuario
     this.getLocation();
+
+    this.platform.ready().then(() => {
+      // Bloquear la orientación en modo vertical (portrait)
+      ScreenOrientation.lock({ orientation: 'portrait' });
+    });
   }
 
   // Método para obtener la IP y el país
@@ -66,4 +79,5 @@ export class AppComponent {
         console.error('Error fetching IP address:', error);
       });
   }
+
 }

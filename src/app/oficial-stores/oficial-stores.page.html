@@ -16,7 +16,7 @@
     </swiper-container>
 
     <!-- Cargado -->
-    <swiper-container [loop]="true" [pagination]="true" *ngIf="!isLoading">
+    <swiper-container [loop]="true" [pagination]="true" autoplay="true" *ngIf="!isLoading">
       <swiper-slide *ngFor="let banner of banners">
         <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
           loading="lazy" [class.hidden]="banner.logoLoaded">

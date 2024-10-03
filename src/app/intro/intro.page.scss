@@ -1,0 +1,51 @@
+.slide-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    /* Se asegura de que el contenedor ocupe toda la altura de la pantalla */
+    text-align: center;
+    padding: 20px;
+}
+
+.intro-image {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto 20px auto;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #666;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    /* Centra la lista */
+}
+
+ul li {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.saltar {
+    position: fixed;
+    top: 20px;
+    right: 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}

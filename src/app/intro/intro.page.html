@@ -1,0 +1,43 @@
+<ion-content>
+
+  <swiper-container [pagination]="true">
+
+    <!-- Slide 1: Bienvenida -->
+    <swiper-slide>
+      <div class="slide-container">
+        <img src="assets/images/shopping-bag.png" alt="Bienvenido a nuestro eCommerce" class="intro-image" />
+        <h1>¡Bienvenido a OneClic!</h1>
+        <p>Descubre una nueva experiencia de compra online, donde todo está al alcance de un clic.</p>
+      </div>
+    </swiper-slide>
+
+    <!-- Slide 2: Funcionalidades -->
+    <swiper-slide>
+      <div class="slide-container">
+        <img src="assets/images/search.png" alt="Explora ofertas" class="intro-image" />
+        <h1>Explora Ofertas</h1>
+        <p>Encuentra productos, sigue a tus comercios favoritos y disfruta de promociones exclusivas.</p>
+        <ul>
+          <li>🚚 Envíos rápidos y seguros</li>
+          <li>💳 Métodos de pago seguros</li>
+          <li>🎁 Ofertas y descuentos personalizados</li>
+        </ul>
+      </div>
+    </swiper-slide>
+
+    <!-- Slide 3: Comienza Ahora -->
+    <swiper-slide>
+      <div class="slide-container">
+        <img src="assets/images/discount.png" alt="Comienza ahora" class="intro-image" />
+        <h1>¡Comienza Ahora!</h1>
+        <p>Regístrate en nuestra plataforma y empieza a comprar en segundos. ¡Tu próxima compra te espera!</p>
+        <ion-button expand="block" shape="round" color="dark" (click)="skipIntro()">Comenzar</ion-button>
+      </div>
+    </swiper-slide>
+
+  </swiper-container>
+
+  <!-- Botón para saltar el slider -->
+  <div (click)="skipIntro()" class="saltar">Saltar <ion-icon name="chevron-forward-outline"></ion-icon></div>
+
+</ion-content>

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  showIntroAlways: true
+  //showIntroAlways: true
 };
 
 /*

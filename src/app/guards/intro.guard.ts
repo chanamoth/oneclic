@@ -13,10 +13,10 @@ export class IntroGuard implements CanLoad {
   async canLoad(): Promise<boolean> {
 
     // Si estamos en modo desarrollo, muestra siempre el intro
-    if (environment.showIntroAlways) {
+    /*if (environment.showIntroAlways) {
       console.log("Modo desarrollo: mostrando intro");
       return true;
-    }
+    }*/
 
     // Comprobando si el intro ha sido visto
     const introSeen = await this.storage.get('introSeen');

@@ -172,8 +172,8 @@ export class HomePage implements OnInit {
     }
   }
 
-  goToPage(page: string) {
-    this.router.navigate([page]);
+  goToStoreProfile(id: string) {
+    this.router.navigate(['/store-profile', id]);
   }
 
 }

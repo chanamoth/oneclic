@@ -1,0 +1,94 @@
+<app-shared-header title="{{ comercio?.nombre }}"></app-shared-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <!-- Banner de la tienda -->
+  <div class="store-banner">
+    <img [src]="comercio?.folder + comercio?.banner" alt="Banner de {{ comercio?.nombre }}" *ngIf="comercio?.banner"
+      class="banner-img">
+    <img src="assets/img/default-banner.png" alt="Banner predeterminado" *ngIf="!comercio?.banner" class="banner-img">
+  </div>
+
+  <!-- Logo e información del comercio -->
+  <div class="store-profile-header">
+    <div class="store-logo-container">
+      <img [src]="comercio?.folder + comercio?.logo" alt="Logo de {{ comercio?.nombre }}" *ngIf="comercio?.logo"
+        class="store-logo">
+      <img src="assets/img/default-store.png" alt="Logo predeterminado" *ngIf="!comercio?.logo" class="store-logo">
+    </div>
+
+    <div class="store-info">
+      <h2>{{ comercio?.nombre }}</h2>
+      <p>{{comercio?.ciudad}} - {{comercio?.provincia}} - {{comercio?.pais}}</p>
+    </div>
+
+    <!-- Iconos de acción (favoritos, compartir, etc.) -->
+    <div class="store-actions">
+      <ion-button fill="clear" color="dark" size="small">
+        <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+      <ion-button fill="clear" color="dark" size="small">
+        <ion-icon name="share-social-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+
+
+  <div class="store-extra">
+    <div class="stat-item">
+      <ion-icon name="star"></ion-icon>
+      <span>{{ '0+' }} ratings</span>
+    </div>
+
+    <div class="stat-item">
+      <ion-icon name="location"></ion-icon>
+      <span>Ubicación</span>
+    </div>
+
+    <div class="stat-item">
+      <ion-icon name="time"></ion-icon>
+      <span>Horario</span>
+    </div>
+  </div>
+
+  <!-- Tabs de la tienda -->
+  <div class="comercio-tabs">
+    <ion-segment [(ngModel)]="selectedTab" scrollable>
+      <ion-segment-button value="about">
+        <ion-label>Sobre Nosotros</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="catalog">
+        <ion-label>Catálogo</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="gallery">
+        <ion-label>Galería</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="live">
+        <ion-label>Go Live!</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="reservations">
+        <ion-label>Reservas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="contact">
+        <ion-label>Contacto</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <!-- Contenido del tab seleccionado -->
+  <div [ngSwitch]="selectedTab">
+
+    <!-- Tab Sobre Nosotros -->
+    <div *ngSwitchCase="'about'">
+      <!-- Iframe de la miniweb del comercio -->
+      <p>Aquí van los datos</p>
+    </div>
+
+    <!-- Tab Catálogo -->
+    <div *ngSwitchCase="'catalog'">
+      <p>Mostrar catálogo aquí</p>
+    </div>
+
+    <!-- Otros tabs pueden ir aquí -->
+  </div>
+
+</ion-content>

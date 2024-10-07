@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
 
@@ -38,7 +39,7 @@ export class OficialStoresPage implements OnInit {
   filteredComercios: any[] = []; // Comercios filtrados por búsqueda
   arrayDemo = new Array(10);
 
-  constructor(public apiService: ApiService, private userLocationService: UserLocationService) {
+  constructor(public apiService: ApiService, private userLocationService: UserLocationService, private router: Router) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -169,4 +170,9 @@ export class OficialStoresPage implements OnInit {
       event.target.complete(); // Completar el refresher
     }, 1500); // Simular un tiempo de carga
   }
+
+  goToStoreProfile(id: string) {
+    this.router.navigate(['/store-profile', id]);
+  }
+
 }

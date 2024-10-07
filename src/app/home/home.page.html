@@ -200,7 +200,7 @@
         <!-- Cargado -->
         <ion-row *ngIf="!isLoading">
           <ion-col size="6" *ngFor="let comercio of comercios">
-            <div class="tienda-card">
+            <div class="tienda-card" (click)="goToStoreProfile(comercio.idcomercio)">
               <div class="ph-row" style="justify-content: center;">
                 <!-- Placeholder (skeleton) visible mientras la imagen no ha cargado -->
                 <div class="ph-picture store-logo"

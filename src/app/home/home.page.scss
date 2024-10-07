@@ -173,13 +173,14 @@ ion-grid {
   border-radius: 8px;
   height: 100%;
 
-  img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+  .store-logo {
+    width: 90px;
+    height: auto;
+    object-fit: contain;
     border-radius: 8px;
     border: 1px solid #f1f1f1;
     margin-top: 15px;
+    background: var(--bg1);
   }
 
   p {
@@ -238,7 +239,7 @@ ion-grid {
 .product-card {
   text-align: center;
   line-height: 1;
-  background-color: #fff;
+  background-color: var(--white);
   border-radius: 8px;
   padding: 10px;
   min-width: 120px;
@@ -304,14 +305,13 @@ ion-modal {
 
     ion-checkbox {
       --border-radius: 50%;
-      --background-checked: #3880ff;
-      --checkmark-color: #ffffff;
+      --background-checked: var(--primary);
+      --checkmark-color: var(--white);
       --size: 22px;
     }
 
     ion-label {
       font-size: 16px;
-      /* Ajuste del tamaño de texto */
       margin-left: 8px;
     }
 
@@ -321,12 +321,12 @@ ion-modal {
 
 /**/
 ion-tab-bar {
-  background-color: var(--white); /* Color de fondo del footer */
-  --color-selected: var(--primary); /* Color del ícono seleccionado */
+  background-color: var(--white);
+  --color-selected: var(--primary);
 }
 
 ion-fab-button {
-  --size: 60px; /* Tamaño más grande del botón central */
+  --size: 60px;
   --border-radius: 50%;
   --background: var(--primary);
 }
@@ -336,5 +336,5 @@ ion-tab-button {
 }
 
 ion-tab-button ion-label {
-  font-size: 12px; /* Ajusta el tamaño del texto */
+  font-size: 12px;
 }

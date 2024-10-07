@@ -5,52 +5,43 @@ ion-header {
     width: 100%;
     z-index: 10;
     --background: transparent !important;
-    /* Forzar transparencia inicial */
     --color: transparent;
-    /* Texto transparente inicialmente */
     transition: background-color 0.3s, color 0.3s;
     box-shadow: none;
-    /* Transición suave */
 }
 
 .header-visible {
-    background: white !important;
+    background: var(--white) !important;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s, color 0.3s;
 }
 
 ion-toolbar {
     --min-height: 56px;
-    /* Asegúrate de que el tamaño de la cabecera sea adecuado */
     --background: transparent !important;
-    /* Asegurar transparencia en el toolbar también */
 }
 
 ion-title {
     font-size: 15px;
     font-weight: bold;
     opacity: 0;
-    /* Oculto inicialmente */
     transition: opacity 0.3s ease;
 }
 
 .header-visible ion-title {
     opacity: 1;
-    /* Mostrar el título al hacer scroll */
 }
 
 .content {
     position: relative;
     z-index: 1;
-    /* Asegura que el contenido esté detrás de la cabecera */
     padding-top: 56px;
-    /* Evitar que el contenido quede bajo la cabecera */
 }
 
 .back-button-gradient {
-    background: white;
-    color: #232323;
-    border-radius: 50%;
+    background: var(--white);
+    color: var(--primary);
+    border-radius: 8px;
     opacity: 0.7;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -60,9 +51,9 @@ ion-title {
     background: white;
     opacity: 1;
     box-shadow: none;
-    border-radius: 50%;
+    border-radius: 0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    color: #232323;
+    color: var(--primary);
 }
 
 ion-back-button {

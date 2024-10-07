@@ -20,7 +20,8 @@
       <swiper-slide *ngFor="let banner of banners">
         <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')" class="banner-img-placeholder"
           loading="lazy" [class.hidden]="banner.logoLoaded">
-        <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
+        <a href="" *ngIf="banner.link"><img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" /></a>
+        <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" *ngIf="!banner.link" />
       </swiper-slide>
     </swiper-container>
 
@@ -29,7 +30,7 @@
       <div class="ph-col-6 big"></div>
       <div class="ph-col-10"></div>
     </div>
-    
+
     <!-- Cargado -->
     <div *ngIf="!isLoading">
       <h2 class="page-title">Tiendas Oficiales</h2>
@@ -81,7 +82,8 @@
               </div>
 
               <!-- Imagen de placeholder mientras se carga -->
-              <div class="ph-row" style="justify-content: center; margin-bottom: 0;" [class.hidden]="comercio.logoLoaded">
+              <div class="ph-row" style="justify-content: center; margin-bottom: 0;"
+                [class.hidden]="comercio.logoLoaded">
                 <div class="ph-picture store-logo" style="width: 90px; height: 90px; border: 1px solid #f1f1f1;"></div>
               </div>
 

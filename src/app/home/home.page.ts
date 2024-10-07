@@ -17,7 +17,7 @@ export class HomePage implements OnInit {
   comercios: any[] = [];
   categorias: any[] = [];
   listado: any[] = [];
-  isLoading: boolean = true;
+  isLoading: boolean = false;
   banners: any[] = [];
   serverUrl: string;
   productosVistos: any[] = [];
@@ -66,7 +66,10 @@ export class HomePage implements OnInit {
     this.apiService.post('search/getLastShopsIndex', { pais: country }).then(response => {
       response.subscribe((data: any) => {
         if (data?.results?.tiendas) {
-          this.comercios = data.results.tiendas;
+          // Mapear los comercios y añadir el campo logoLoaded inicializado en false
+          this.comercios = data.results.tiendas.map((comercio: any) => {
+            return { ...comercio, logoLoaded: false };
+          });
         }
         this.isLoading = false;
       }, () => {
@@ -82,7 +85,10 @@ export class HomePage implements OnInit {
     this.apiService.post('search/get_categorias_app', {}).then(response => {
       response.subscribe((data: any) => {
         if (data?.results?.categorias) {
-          this.categorias = data.results.categorias;
+          //this.categorias = data.results.categorias;
+          this.categorias = data.results.categorias.map((categoria: any) => {
+            return { ...categoria, imgLoaded: false };
+          });
         }
         this.isLoading = false;
       }, () => {
@@ -107,11 +113,12 @@ export class HomePage implements OnInit {
     }).then(response => {
       response.subscribe((data: any) => {
         if (data?.banners) {
-          this.banners = data.banners;
+          // Mapear los banners y añadir el campo bannerLoaded inicializado en false
+          this.banners = data.banners.map((banner: any) => {
+            return { ...banner, bannerLoaded: false };
+          });
+          this.isLoading = false;
         }
-        this.isLoading = false;
-      }, () => {
-        this.isLoading = false; // Manejar el error
       });
     });
   }
@@ -126,8 +133,13 @@ export class HomePage implements OnInit {
     this.apiService.post('search/fullsearch', { pais: country, from: 0, rows: 10 }).then(response => {
       response.subscribe((data: any) => {
         if (data?.results?.listado) {
-          // Ordenar los datos por idarticulo en orden descendente
-          this.listado = data.results.listado.sort((a: any, b: any) => b.idarticulo - a.idarticulo);
+          // Añadir la propiedad productoLoaded para gestionar el estado de carga
+          this.listado = data.results.listado.map((producto: any) => {
+            return { ...producto, productoLoaded: false };
+          });
+
+          // Ordenar los productos por idarticulo en orden descendente
+          this.listado = this.listado.sort((a: any, b: any) => b.idarticulo - a.idarticulo);
         }
         this.isLoading = false;
       }, () => {

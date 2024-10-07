@@ -138,8 +138,12 @@
       <swiper-container [loop]="true" [pagination]="true" autoplay="true" *ngIf="!isLoading">
         <swiper-slide *ngFor="let banner of banners">
           <img [src]="apiService.getOptimizedImageUrl(banner.folder, banner.img, 'banner')"
-            class="banner-img-placeholder" loading="lazy" [class.hidden]="banner.logoLoaded">
-          <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.logoLoaded = true" />
+            class="banner-img-placeholder" loading="lazy" [class.hidden]="banner.bannerLoaded">
+          <a href="" *ngIf="banner.link">
+            <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.bannerLoaded = true" />
+          </a>
+          <img [src]="banner.img" class="banner-img" loading="lazy" (load)="banner.bannerLoaded = true"
+            *ngIf="!banner.link" />
         </swiper-slide>
       </swiper-container>
     </div>
@@ -185,7 +189,8 @@
         <ion-row *ngIf="isLoading">
           <ion-col size="6" *ngFor="let item of arraArrivals">
             <div class="tienda-card ph-row" style="justify-content: center;">
-              <div class="ph-picture" style="height: 100px; width: 100px; border-radius: 8px; margin-top: 15px;"></div>
+              <div class="ph-picture store-logo"
+                style="height: 100px; width: 100px; border-radius: 8px; margin-top: 15px;"></div>
               <div class="ph-col-8" style="margin-top: 10px;"></div>
               <div class="ph-col-6" style="margin-bottom: 14px;"></div>
             </div>
@@ -196,7 +201,17 @@
         <ion-row *ngIf="!isLoading">
           <ion-col size="6" *ngFor="let comercio of comercios">
             <div class="tienda-card">
-              <img [src]="serverUrl + comercio.logo" alt="{{ comercio.nombre }}">
+              <div class="ph-row" style="justify-content: center;">
+                <!-- Placeholder (skeleton) visible mientras la imagen no ha cargado -->
+                <div class="ph-picture store-logo"
+                  style="height: 100px; width: 100px; border-radius: 8px; margin-top: 15px;"
+                  [class.hidden]="comercio.logoLoaded === true"></div>
+              </div>
+              <!-- Imagen del logo (se muestra cuando la imagen ha cargado) -->
+              <img [src]="serverUrl + comercio.logo" class="store-logo" (load)="comercio.logoLoaded = true"
+                loading="lazy" *ngIf="comercio.logo">
+              <img [src]="serverUrl + 'img/default.png'" class="store-logo" (load)="comercio.logoLoaded = true"
+                loading="lazy" *ngIf="!comercio.logo">
               <p>{{ comercio.nombre }}</p>
             </div>
           </ion-col>
@@ -229,7 +244,10 @@
       <!-- Cargado -->
       <div class="categories" *ngIf="!isLoading">
         <div class="category" *ngFor="let categoria of categorias">
-          <img src="{{ categoria.icono }}" alt="{{ categoria.categoria }}">
+          <div class="ph-row" style="justify-content: center;">
+            <div class="ph-picture" style="height: 50px; width: 50px;" [class.hidden]="categoria.imgLoaded === true"></div>
+          </div>
+          <img src="{{ categoria.icono }}" loading="lazy" (load)="categoria.imgLoaded = true">
           <p>{{ categoria.categoria }}</p>
         </div>
       </div>
@@ -258,7 +276,10 @@
       <swiper-container [slidesPerView]="2" [spaceBetween]="15" [loop]="true" *ngIf="!isLoading">
         <swiper-slide *ngFor="let producto of listado">
           <div class="product-card">
-            <img [src]="serverUrl + producto.folder + producto.foto_principal" alt="{{ producto.titulo }}">
+            <div class="ph-row" style="justify-content: center; align-items: center;">
+              <div class="ph-picture" style="height: 155px; width: 120px; border-radius: 5px;" [class.hidden]="producto.productoLoaded === true"></div>
+            </div>
+            <img [src]="serverUrl + producto.folder + producto.foto_principal" (load)="producto.productoLoaded = true">
             <h6>{{ producto.titulo }}</h6>
             <p>{{ producto.categoria }}</p>
             <p>{{ producto.moneda }} {{ producto.precio }}</p>

@@ -245,7 +245,8 @@
       <div class="categories" *ngIf="!isLoading">
         <div class="category" *ngFor="let categoria of categorias">
           <div class="ph-row" style="justify-content: center;">
-            <div class="ph-picture" style="height: 50px; width: 50px;" [class.hidden]="categoria.imgLoaded === true"></div>
+            <div class="ph-picture" style="height: 50px; width: 50px;" [class.hidden]="categoria.imgLoaded === true">
+            </div>
           </div>
           <img src="{{ categoria.icono }}" loading="lazy" (load)="categoria.imgLoaded = true">
           <p>{{ categoria.categoria }}</p>
@@ -277,7 +278,8 @@
         <swiper-slide *ngFor="let producto of listado">
           <div class="product-card">
             <div class="ph-row" style="justify-content: center; align-items: center;">
-              <div class="ph-picture" style="height: 155px; width: 120px; border-radius: 5px;" [class.hidden]="producto.productoLoaded === true"></div>
+              <div class="ph-picture" style="height: 155px; width: 120px; border-radius: 5px;"
+                [class.hidden]="producto.productoLoaded === true"></div>
             </div>
             <img [src]="serverUrl + producto.folder + producto.foto_principal" (load)="producto.productoLoaded = true">
             <h6>{{ producto.titulo }}</h6>
@@ -386,34 +388,30 @@
 
 </ion-content>
 
-<!--<ion-tabs>
+<ion-footer>
   <ion-tab-bar slot="bottom">
-
-    <ion-tab-button tab="perfil">
+    <ion-tab-button tab="home">
       <ion-icon name="person-outline"></ion-icon>
-      <ion-label>Mi Perfil</ion-label>
+      <ion-label>Perfil</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="ofertas">
+    <ion-tab-button tab="favourite">
       <ion-icon name="notifications-outline"></ion-icon>
       <ion-label>Ofertas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="crear-oferta">
-      <ion-fab-button>
-        <ion-icon name="add-circle-outline"></ion-icon>
-      </ion-fab-button>
-    </ion-tab-button>
+    <ion-fab-button class="fab-center">
+      <ion-icon name="cart-outline"></ion-icon>
+    </ion-fab-button>
 
-    <ion-tab-button tab="consultas">
+    <ion-tab-button tab="orders">
       <ion-icon name="chatbubble-outline"></ion-icon>
       <ion-label>Consultas</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="calificar">
+    <ion-tab-button tab="menu">
       <ion-icon name="star-outline"></ion-icon>
       <ion-label>Calificar</ion-label>
     </ion-tab-button>
-
   </ion-tab-bar>
-</ion-tabs>-->
+</ion-footer>

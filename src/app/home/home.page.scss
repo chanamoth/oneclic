@@ -246,14 +246,15 @@ ion-grid {
   min-height: 210px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   overflow: hidden;
   margin-bottom: 10px;
+  align-items: center;
 }
 
 .product-card img {
-  width: 100%;
-  height: 120px;
+  width: 140px;
+  height: 140px;
   object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;

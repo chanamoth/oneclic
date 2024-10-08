@@ -19,6 +19,7 @@ export class StoreProfilePage implements OnInit {
   currentPage: number = 0;
   pageSize: number = 10;
   isFixed: boolean = false;
+  isLoading: boolean = true;
 
   // Nuevas propiedades para la vista y ordenación
   viewMode: string = 'grid'; // Para alternar entre grid y lista
@@ -60,6 +61,7 @@ export class StoreProfilePage implements OnInit {
 
         // Cargar los primeros productos
         this.loadMoreProducts(null);
+        this.isLoading = false;
       });
     });
   }
@@ -104,4 +106,15 @@ export class StoreProfilePage implements OnInit {
     }
     this.productos = this.allProductos.slice(0, this.currentPage * this.pageSize);
   }
+
+  // Refrescar los datos de la página
+  refreshData(event: any) {
+    this.isLoading = true;
+    this.ngOnInit();
+    setTimeout(() => {
+      this.isLoading = false;
+      event.target.complete(); // Completar el refresher
+    }, 1500); // Simular un tiempo de carga
+  }
+
 }

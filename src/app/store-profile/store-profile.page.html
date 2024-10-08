@@ -1,6 +1,11 @@
-<app-shared-header title="{{ comercio?.nombre }}" [scrolled]="scrolled"></app-shared-header>
+<app-shared-header title="{{ comercio?.nombre }}" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
 <ion-content [fullscreen]="true" color="light" (ionScroll)="onScroll($event)" scrollEvents="true">
+
+  <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
+    <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
+  </ion-refresher>
+
   <!-- Banner de la tienda -->
   <div class="store-banner">
     <img [src]="comercio?.folder + comercio?.banner" alt="Banner de {{ comercio?.nombre }}" *ngIf="comercio?.banner"
@@ -114,6 +119,7 @@
 
       <!-- Productos -->
       <ion-grid>
+
         <ion-row *ngIf="viewMode === 'grid'">
           <!-- Mostrar productos en grid -->
           <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2"
@@ -138,6 +144,7 @@
             </ion-label>
           </ion-item>
         </ion-list>
+
       </ion-grid>
 
       <!-- Infinite Scroll para cargar más productos -->

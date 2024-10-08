@@ -6,18 +6,44 @@
     <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
   </ion-refresher>
 
-  <!-- Banner de la tienda -->
-  <div class="store-banner">
-    <img [src]="comercio?.folder + comercio?.banner" alt="Banner de {{ comercio?.nombre }}" *ngIf="comercio?.banner"
-      class="banner-img">
-    <img src="assets/img/default-banner.png" alt="Banner predeterminado" *ngIf="!comercio?.banner" class="banner-img">
+  <!-- Preloader -->
+  <div class="store-banner" *ngIf="isLoading">
+    <div class="ph-row">
+      <div class="ph-picture" style="width: 100%; height: 100%; background: var(--bg1)"></div>
+    </div>
   </div>
 
-  <!-- Logo e información del comercio -->
-  <div class="store-profile-header">
+  <!-- Cargado -->
+  <div class="store-banner" *ngIf="!isLoading">
+    <img [src]="comercio?.folder + comercio?.banner" *ngIf="comercio?.banner" class="banner-img" loading="lazy">
+  </div>
+
+  <!-- Preloader -->
+  <div class="store-profile-header" *ngIf="isLoading">
+    <div class="store-logo-container ph-row">
+      <div class="ph-picture store-logo" style="width: 80px; height: 80px; background: var(--bg1)"></div>
+    </div>
+
+    <div class="store-info php-row">
+      <div class="ph-col-12" style="height: 16px; background: #ccc; margin-bottom: 10px;"></div>
+      <div class="ph-col-6" style="width: 60%; height: 10px; background: #ccc;"></div>
+    </div>
+
+    <!-- Iconos de acción (favoritos, compartir, etc.) -->
+    <div class="store-actions">
+      <ion-button fill="clear" color="dark" size="small">
+        <ion-spinner color="dark"></ion-spinner>
+      </ion-button>
+      <ion-button fill="clear" color="dark" size="small">
+        <ion-spinner color="dark"></ion-spinner>
+      </ion-button>
+    </div>
+  </div>
+
+  <!-- Cargado -->
+  <div class="store-profile-header" *ngIf="!isLoading">
     <div class="store-logo-container">
-      <img [src]="comercio?.folder + comercio?.logo" alt="Logo de {{ comercio?.nombre }}" *ngIf="comercio?.logo"
-        class="store-logo">
+      <img [src]="comercio?.folder + comercio?.logo" *ngIf="comercio?.logo" class="store-logo" loading="lazy">
       <img src="assets/img/default-store.png" alt="Logo predeterminado" *ngIf="!comercio?.logo" class="store-logo">
     </div>
 
@@ -37,7 +63,7 @@
     </div>
   </div>
 
-
+  <!-- Cargado -->
   <div class="store-extra">
     <div class="stat-item">
       <!-- Muestra siempre 5 estrellas y colorea según ComentariosRating -->
@@ -125,7 +151,7 @@
           <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2"
             *ngFor="let item of productos; let i = index">
             <div class="product-card">
-              <img [src]="serverUrl + item.folder + item.foto_principal" class="product-img" />
+              <img [src]="serverUrl + item.folder + item.foto_principal" class="product-img ph-picture" loading="lazy" />
               <h2>{{ item.titulo }}</h2>
               <p>{{ item.moneda }} {{ item.precio }}</p>
             </div>
@@ -136,7 +162,7 @@
           <!-- Mostrar productos en lista -->
           <ion-item *ngFor="let item of productos">
             <ion-thumbnail slot="start">
-              <img [src]="serverUrl + item.folder + item.foto_principal" />
+              <img [src]="serverUrl + item.folder + item.foto_principal" class="ph-picture" loading="lazy" />
             </ion-thumbnail>
             <ion-label>
               <h2>{{ item.titulo }}</h2>

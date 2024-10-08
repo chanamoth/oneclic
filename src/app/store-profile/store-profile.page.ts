@@ -25,6 +25,8 @@ export class StoreProfilePage implements OnInit {
   viewMode: string = 'grid'; // Para alternar entre grid y lista
   sortBy: string = 'relevance'; // Para seleccionar el criterio de orden
 
+  Math = Math;
+
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,

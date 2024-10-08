@@ -1,6 +1,6 @@
-<app-shared-header title="{{ comercio?.nombre }}"></app-shared-header>
+<app-shared-header title="{{ comercio?.nombre }}" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content [fullscreen]="true" color="light">
+<ion-content [fullscreen]="true" color="light" (ionScroll)="onScroll($event)" scrollEvents="true">
   <!-- Banner de la tienda -->
   <div class="store-banner">
     <img [src]="comercio?.folder + comercio?.banner" alt="Banner de {{ comercio?.nombre }}" *ngIf="comercio?.banner"
@@ -35,8 +35,12 @@
 
   <div class="store-extra">
     <div class="stat-item">
-      <ion-icon name="star"></ion-icon>
-      <span>{{ '0+' }} ratings</span>
+      <!-- Muestra siempre 5 estrellas y colorea según ComentariosRating -->
+      <ng-container *ngFor="let star of [1, 2, 3, 4, 5]; let i = index">
+        <ion-icon name="star" [style.color]="i < comercio?.ComentariosRating ? '#FFD700' : '#E0E0E0'"></ion-icon>
+      </ng-container>
+
+      <span>{{ comercio?.ComentariosRating || '0' }} ratings</span>
     </div>
 
     <div class="stat-item">
@@ -51,10 +55,10 @@
   </div>
 
   <!-- Tabs de la tienda -->
-  <div class="comercio-tabs">
+  <div class="comercio-tabs" #comercioTabs>
     <ion-segment [(ngModel)]="selectedTab" scrollable>
       <ion-segment-button value="about">
-        <ion-label>Sobre Nosotros</ion-label>
+        <ion-label>Nosotros</ion-label>
       </ion-segment-button>
       <ion-segment-button value="catalog">
         <ion-label>Catálogo</ion-label>
@@ -85,7 +89,63 @@
 
     <!-- Tab Catálogo -->
     <div *ngSwitchCase="'catalog'">
-      <p>Mostrar catálogo aquí</p>
+
+      <!-- Controles de filtros -->
+      <div class="catalog-controls">
+        <!-- Filtro para ordenar productos -->
+        <ion-select [(ngModel)]="sortBy" (ionChange)="sortProducts()" interface="popover">
+          <ion-select-option value="relevance">Relevancia</ion-select-option>
+          <ion-select-option value="low-to-high">Precio: Bajo a Alto</ion-select-option>
+          <ion-select-option value="high-to-low">Precio: Alto a Bajo</ion-select-option>
+          <ion-select-option value="newest">Últimos agregados</ion-select-option>
+          <ion-select-option value="alphabetical">Orden Alfabético (A-Z)</ion-select-option>
+        </ion-select>
+
+        <!-- Filtro para vista (grid o lista) -->
+        <ion-segment [(ngModel)]="viewMode" class="view-mode-toggle">
+          <ion-segment-button value="grid">
+            <ion-icon name="grid-outline"></ion-icon>
+          </ion-segment-button>
+          <ion-segment-button value="list">
+            <ion-icon name="list-outline"></ion-icon>
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+
+      <!-- Productos -->
+      <ion-grid>
+        <ion-row *ngIf="viewMode === 'grid'">
+          <!-- Mostrar productos en grid -->
+          <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2"
+            *ngFor="let item of productos; let i = index">
+            <div class="product-card">
+              <img [src]="serverUrl + item.folder + item.foto_principal" class="product-img" />
+              <h2>{{ item.titulo }}</h2>
+              <p>{{ item.moneda }} {{ item.precio }}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+
+        <ion-list *ngIf="viewMode === 'list'">
+          <!-- Mostrar productos en lista -->
+          <ion-item *ngFor="let item of productos">
+            <ion-thumbnail slot="start">
+              <img [src]="serverUrl + item.folder + item.foto_principal" />
+            </ion-thumbnail>
+            <ion-label>
+              <h2>{{ item.titulo }}</h2>
+              <p>{{ item.moneda }} {{ item.precio }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-grid>
+
+      <!-- Infinite Scroll para cargar más productos -->
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreProducts($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando más productos...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
     </div>
 
     <!-- Otros tabs pueden ir aquí -->

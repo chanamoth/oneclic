@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';  // Importar DomSanitizer y SafeResourceUrl
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-store-profile',
@@ -11,16 +11,23 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';  // I
 export class StoreProfilePage implements OnInit {
   comercio: any;
   productos: any[] = [];
+  allProductos: any[] = [];
   serverUrl: string;
-  miniwebUrl: SafeResourceUrl = '';  // Cambiar a SafeResourceUrl para URL sanitizada
-  selectedTab: string = 'about';  // Tab seleccionado por defecto
+  miniwebUrl: SafeResourceUrl = '';
+  selectedTab: string = 'about';
+  scrolled: boolean = false;
+  currentPage: number = 0;
+  pageSize: number = 10;
+  isFixed: boolean = false;
 
-  @ViewChild('miniweb', { static: false }) iframe!: ElementRef;
+  // Nuevas propiedades para la vista y ordenación
+  viewMode: string = 'grid'; // Para alternar entre grid y lista
+  sortBy: string = 'relevance'; // Para seleccionar el criterio de orden
 
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
-    private sanitizer: DomSanitizer  // Inyectar DomSanitizer
+    private sanitizer: DomSanitizer
   ) {
     this.serverUrl = this.apiService.getServerUrl();
   }
@@ -35,22 +42,66 @@ export class StoreProfilePage implements OnInit {
     }
   }
 
+  // Controla el scroll para mostrar o no la cabecera
+  onScroll(event: any) {
+    const scrollTop = event.detail.scrollTop;
+    this.scrolled = scrollTop > 50;
+  }
+
   // Cargar los datos de la tienda
   loadComercioData(id: string) {
     this.apiService.post(`comercio_app/${id}`, {}).then(response => {
       response.subscribe((data: any) => {
         this.comercio = data?.comercio;
+        this.allProductos = data?.comercio?.articulos || [];
 
-        // Formar la URL de la miniweb del comercio y sanitizarla
-        const miniweb = `https://oneclic.app/comercio_miniweb/${data?.comercio?.idcomercio}`;
-        this.miniwebUrl = this.sanitizer.bypassSecurityTrustResourceUrl(miniweb);  // Sanitizar la URL
+        // Ordenar los productos por el criterio seleccionado
+        this.sortProducts();
+
+        // Cargar los primeros productos
+        this.loadMoreProducts(null);
       });
     });
   }
 
-  // Ajustar la altura del iframe
-  adjustIframeHeight(event: any) {
-    const iframe = event.target;
-    iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 30 + 'px';
+  // Función para cargar más productos
+  loadMoreProducts(event: any) {
+    const start = this.currentPage * this.pageSize;
+    const end = start + this.pageSize;
+    const newProductos = this.allProductos.slice(start, end);
+    this.productos = [...this.productos, ...newProductos];
+
+    this.currentPage++;
+
+    if (event) {
+      event.target.complete();
+    }
+
+    if (this.productos.length >= this.allProductos.length && event) {
+      event.target.disabled = true;
+    }
+  }
+
+  // Función para ordenar productos
+  sortProducts() {
+    switch (this.sortBy) {
+      case 'low-to-high':
+        this.allProductos.sort((a, b) => a.precio - b.precio);
+        break;
+      case 'high-to-low':
+        this.allProductos.sort((a, b) => b.precio - a.precio);
+        break;
+      case 'newest':
+        this.allProductos.sort((a, b) => b.idarticulo - a.idarticulo);
+        break;
+      case 'alphabetical':
+        this.allProductos.sort((a, b) => a.titulo.localeCompare(b.titulo));
+        break;
+      case 'relevance':
+      default:
+        this.allProductos.sort((a, b) => b.visitas - a.visitas);
+        break;
+    }
+    this.productos = this.allProductos.slice(0, this.currentPage * this.pageSize);
   }
 }

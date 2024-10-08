@@ -32,10 +32,10 @@
     <!-- Iconos de acción (favoritos, compartir, etc.) -->
     <div class="store-actions">
       <ion-button fill="clear" color="dark" size="small">
-        <ion-spinner color="dark"></ion-spinner>
+        <ion-spinner color="dark" name="dots"></ion-spinner>
       </ion-button>
       <ion-button fill="clear" color="dark" size="small">
-        <ion-spinner color="dark"></ion-spinner>
+        <ion-spinner color="dark" name="dots"></ion-spinner>
       </ion-button>
     </div>
   </div>
@@ -91,17 +91,23 @@
       <ion-segment-button value="about">
         <ion-label>Nosotros</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="catalog">
+      <ion-segment-button value="catalog" *ngIf="comercio?.codigo && comercio?.articulos">
         <ion-label>Catálogo</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="gallery">
+      <ion-segment-button value="gallery" *ngIf="comercio?.allowgalerie && comercio?.galeria">
         <ion-label>Galería</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="live">
+      <ion-segment-button value="blog" *ngIf="comercio?.miniweb">
+        <ion-label>Blog</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="live" *ngIf="comercio?.live_streaming">
         <ion-label>Go Live!</ion-label>
       </ion-segment-button>
-      <ion-segment-button value="reservations">
+      <ion-segment-button value="reservations" *ngIf="comercio?.buquit == 1">
         <ion-label>Reservas</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="team" *ngIf="comercio?.Tarjetas">
+        <ion-label>Equipo</ion-label>
       </ion-segment-button>
       <ion-segment-button value="contact">
         <ion-label>Contacto</ion-label>
@@ -114,8 +120,47 @@
 
     <!-- Tab Sobre Nosotros -->
     <div *ngSwitchCase="'about'">
-      <!-- Iframe de la miniweb del comercio -->
-      <p>Aquí van los datos</p>
+
+      <div class="about-section">
+        <!-- Imagen destacada -->
+        <div class="about-banner" *ngIf="comercio?.img_descripcion">
+          <img [src]="comercio?.folder + comercio?.img_descripcion" />
+        </div>
+
+        <!-- Descripción y datos del comercio -->
+        <div class="about-content">
+          <div class="description-section">
+            <h2>{{ comercio?.nombre }}</h2>
+            <iframe [src]="description" id="comdesc" scrolling="no" style="min-width: 111%;
+              border: 0px;
+              min-height: 200px;
+              margin-left: -20px;" (load)="adjustIframeHeight($event)" *ngIf="!isLoading">
+            </iframe>
+          </div>
+
+          <!-- Datos de contacto -->
+          <div class="contact-section">
+            <h3>Información de Contacto</h3>
+            <ul>
+              <li><ion-icon name="person-add-outline"></ion-icon> <strong>Seguidores:</strong> {{comercio?.seguidores}}
+              </li>
+              <li><ion-icon name="eye-outline"></ion-icon> <strong>Visitas:</strong> {{comercio?.visitas}} </li>
+              <li><ion-icon name="phone-portrait-outline"></ion-icon> <strong>Celular:</strong> <a
+                  href="tel:{{comercio?.telefono_celular}}"> {{comercio?.telefono_celular}} </a></li>
+              <li><ion-icon name="call-outline"></ion-icon> <strong>Teléfono:</strong> <a
+                  href="tel:{{comercio?.telefono_fijo}}"> {{comercio?.telefono_fijo}} </a></li>
+              <li><ion-icon name="logo-whatsapp"></ion-icon> <strong>WhatsApp:</strong> <a
+                  href="https://wa.me/{{comercio?.whatsapp}}?text=Hola,%20te%20escribo%20desde%20OneClic" class="color">
+                  {{comercio?.whatsapp}}</a></li>
+              <li><ion-icon name="link-outline"></ion-icon> <strong>Link OneClic:</strong> <a
+                  href="https://oneclic.app/{{comercio?.url}}.html"> https://oneclic.app/{{comercio?.url}} </a></li>
+              <li><ion-icon name="globe-outline"></ion-icon> <strong>Sitio web:</strong> <a
+                  href="{{comercio?.sitioweb}}"> {{comercio?.sitioweb}} </a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- Tab Catálogo -->
@@ -151,7 +196,8 @@
           <ion-col size="6" size-sm="6" size-md="4" size-lg="3" size-xl="2"
             *ngFor="let item of productos; let i = index">
             <div class="product-card">
-              <img [src]="serverUrl + item.folder + item.foto_principal" class="product-img ph-picture" loading="lazy" />
+              <img [src]="serverUrl + item.folder + item.foto_principal" class="product-img ph-picture"
+                loading="lazy" />
               <h2>{{ item.titulo }}</h2>
               <p>{{ item.moneda }} {{ item.precio }}</p>
             </div>

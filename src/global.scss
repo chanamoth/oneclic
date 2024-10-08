@@ -124,12 +124,10 @@ ion-tab-button {
 
 ion-content {
     margin-bottom: 56px;
-    /* Ajustar el espacio inferior para que el contenido no sea cubierto por los tabs */
 }
 
 ion-tab-bar {
     z-index: 10;
-    /* Asegura que la barra de tabs esté en una capa superior */
 }
 
 ion-fab-button {
@@ -139,6 +137,49 @@ ion-fab-button {
     ion-icon {
         color: var(--white);
     }
+}
+
+ion-segment-button {
+    --indicator-color: var(--primary);
+}
+
+ion-segment-button ion-icon {
+    font-size: 22px;
+    color: var(--primary);
+}
+
+ion-segment-button ion-label {
+    color: var(--primary);
+}
+
+ion-select {
+    --highlight-color-focused: var(--primary); /* Cambia el color de la línea cuando está seleccionado */
+    --highlight-color-valid: var(--primary); /* Cambia el color cuando es válido */
+    --highlight-color-invalid: var(--primary); /* Cambia el color cuando es inválido */
+    --color: var(--primary); /* Cambia el color del texto */
+}
+
+ion-alert .alert-button-group button {
+    width: 100px; /* Ancho fijo para mantener uniformidad */
+    margin: 0 10px; /* Espacio entre los botones */
+    font-weight: bold; /* Añadir énfasis a los botones */
+}
+
+ion-alert .alert-button-group button.alert-button-role-cancel {
+    color: #ff4d4d; /* Cambia el color del botón de "CANCEL" */
+    position: absolute;
+    left: -10px;
+}
+
+ion-alert .alert-button-group button.alert-button-role-ok {
+    color: #007bff; /* Cambia el color del botón de "OK" */
+    position: absolute;
+    right: 10px;
+}
+
+ion-alert .alert-wrapper {
+    border-radius: 8px; /* Añadir un borde redondeado */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Mejorar la sombra */
 }
 
 .text-center {

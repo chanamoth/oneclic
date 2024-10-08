@@ -93,7 +93,7 @@
       <!-- Controles de filtros -->
       <div class="catalog-controls">
         <!-- Filtro para ordenar productos -->
-        <ion-select [(ngModel)]="sortBy" (ionChange)="sortProducts()" interface="popover">
+        <ion-select [(ngModel)]="sortBy" interface="action-sheet" (ionChange)="sortProducts()">
           <ion-select-option value="relevance">Relevancia</ion-select-option>
           <ion-select-option value="low-to-high">Precio: Bajo a Alto</ion-select-option>
           <ion-select-option value="high-to-low">Precio: Alto a Bajo</ion-select-option>

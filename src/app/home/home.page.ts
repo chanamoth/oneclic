@@ -78,6 +78,11 @@ export class HomePage implements OnInit {
     }
   }
 
+  handleClick() {
+    this.logout();
+    this.closeMenu();
+  }
+
   logout() {
     this.authService.logout();
   }

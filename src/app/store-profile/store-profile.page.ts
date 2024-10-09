@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, HostListener } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
@@ -13,12 +13,14 @@ export class StoreProfilePage implements OnInit {
   productos: any[] = [];
   allProductos: any[] = [];
   serverUrl: string;
+  selectedImage: any = null;
   selectedTab: string = 'about';
   scrolled: boolean = false;
   currentPage: number = 0;
   pageSize: number = 10;
   isFixed: boolean = false;
   isLoading: boolean = true;
+  isModalOpen: boolean = false;
 
   // Nuevas propiedades para la vista y ordenación
   viewMode: string = 'grid'; // Para alternar entre grid y lista
@@ -77,7 +79,7 @@ export class StoreProfilePage implements OnInit {
     if (iframeWindow.document.body) {
       iframe.style.height = iframeWindow.document.body.scrollHeight + 'px';
     }
-  } 
+  }
 
   // Función para cargar más productos
   loadMoreProducts(event: any) {
@@ -128,6 +130,20 @@ export class StoreProfilePage implements OnInit {
       this.isLoading = false;
       event.target.complete(); // Completar el refresher
     }, 1500); // Simular un tiempo de carga
+  }
+
+  // Función para abrir la imagen en un modal
+  openImage(item: any) {
+    this.selectedImage = item;
+    this.isModalOpen = true;
+  }
+
+  // Cierra el modal
+  setOpen(isOpen: boolean) {
+    this.isModalOpen = isOpen;
+    if (!isOpen) {
+      this.selectedImage = null; // Limpiar la imagen seleccionada
+    }
   }
 
 }

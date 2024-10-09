@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { IntroGuard } from './guards/intro.guard';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -23,19 +24,20 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule)
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'categories',
-    loadChildren: () => import('./categories/categories.module').then( m => m.CategoriesPageModule)
+    loadChildren: () => import('./categories/categories.module').then(m => m.CategoriesPageModule)
   },
   {
     path: 'notifications',
-    loadChildren: () => import('./notifications/notifications.module').then( m => m.NotificationsPageModule)
+    loadChildren: () => import('./notifications/notifications.module').then(m => m.NotificationsPageModule)
   },
   {
     path: 'store-profile/:id',
-    loadChildren: () => import('./store-profile/store-profile.module').then( m => m.StoreProfilePageModule)
+    loadChildren: () => import('./store-profile/store-profile.module').then(m => m.StoreProfilePageModule)
   }
 ];
 

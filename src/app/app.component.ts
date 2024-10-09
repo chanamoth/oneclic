@@ -6,6 +6,7 @@ import { register } from 'swiper/element/bundle';
 import { IpService } from './services/ip.service'; // Servicio para obtener la IP
 import { GeolocationService } from './services/geolocation.service'; // Servicio para obtener la geolocalización
 import { UserLocationService } from './services/user-location.service'; // Servicio compartido para almacenar IP y país
+import { AuthService } from './services/auth.service';
 import { ScreenOrientation } from '@capacitor/screen-orientation';
 import { Storage } from '@ionic/storage-angular';  // Importar Storage
 
@@ -20,12 +21,16 @@ register();
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  USER: any = null;
+
   constructor(
     private ipService: IpService,
     private geoService: GeolocationService,
     private userLocationService: UserLocationService,
     private platform: Platform,
-    private storage: Storage  // Añadir Storage aquí
+    private storage: Storage,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -33,6 +38,8 @@ export class AppComponent {
   async initializeApp() {
     // Inicializar el almacenamiento antes de hacer cualquier cosa con él
     await this.storage.create();
+
+    this.checkUserLogin();
 
     // Ocultar el splash screen de Capacitor después de que la app esté lista
     SplashScreen.hide();
@@ -52,6 +59,16 @@ export class AppComponent {
       // Bloquear la orientación en modo vertical (portrait)
       ScreenOrientation.lock({ orientation: 'portrait' });
     });
+
+  }
+
+  checkUserLogin() {
+    this.USER = this.authService.getUser();  // Obtener el usuario logueado si existe
+  }
+
+  logout() {
+    this.authService.logout();  // Logout y limpiar el usuario
+    this.USER = null;
   }
 
   // Método para obtener la IP y el país

@@ -1,30 +1,29 @@
-<app-shared-header title="Login" [scrolled]="scrolled"></app-shared-header>
+<app-shared-header title="Login" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
 <ion-content class="ion-padding" (ionScroll)="onScroll($event)" scrollEvents="true">
   <div class="login-container">
-    <ion-back-button class="back-button"></ion-back-button> <!-- Botón de retroceso -->
 
     <h1>¡Hola! 👋</h1>
     <p class="text-center mb-10">Para continuar, por favor ingresa tus credenciales</p>
 
     <ion-item class="input-item">
-      <ion-input placeholder="Correo electrónico" type="email" [(ngModel)]="email"></ion-input>
+      <ion-input placeholder="Correo electrónico" type="email" [(ngModel)]="email" (ionInput)="checkFormValidity()"></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
-      <ion-input placeholder="Contraseña" [type]="passwordType" [(ngModel)]="password"></ion-input>
+      <ion-input placeholder="Contraseña" [type]="passwordType" [(ngModel)]="password" (ionInput)="checkFormValidity()"></ion-input>
       <ion-icon slot="end" [name]="passwordIcon" (click)="togglePasswordVisibility()" class="icon-input"></ion-icon>
     </ion-item>
 
     <a class="forgot-password" href="#">¿Olvidaste tu contraseña?</a>
 
-    <ion-button expand="block" color="dark" shape="round" class="login-button">Iniciar sesión</ion-button>
+    <ion-button expand="block" color="dark" class="login-button" (click)="login()" [disabled]="isButtonDisabled" *ngIf="!isLoading">Ingresar</ion-button>
+    <ion-button expand="block" color="dark" disabled class="login-button" *ngIf="isLoading"><ion-spinner></ion-spinner></ion-button>
 
     <p class="login-text">O inicia sesión con</p>
 
-    <ion-button expand="block" fill="outline" class="social-button" shape="round">
-      Facebook
-    </ion-button>
+    <ion-button expand="block" fill="outline" class="social-button" *ngIf="!isLoading">Facebook</ion-button>
+    <ion-button expand="block" fill="outline" class="social-button" disabled *ngIf="isLoading">Facebook</ion-button>
 
     <p class="signup-text">¿No tienes cuenta? <a href="#">Regístrate</a></p>
   </div>

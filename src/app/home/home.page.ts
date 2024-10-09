@@ -4,6 +4,8 @@ import { ApiService } from '../services/api.service';
 import { UserLocationService } from '../services/user-location.service';
 import { IonContent, MenuController, ModalController } from '@ionic/angular';
 import { ConnectionService } from '../services/connection.service';
+import { AuthService } from '../services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -26,8 +28,17 @@ export class HomePage implements OnInit {
   arraArrivals = new Array(4);
   /* */
   isOnline: boolean = true;
+  USER: any = null;
+  private userSubscription!: Subscription;
 
-  constructor(private menu: MenuController, public apiService: ApiService, private userLocationService: UserLocationService, private modalController: ModalController, private connectionService: ConnectionService, private cd: ChangeDetectorRef, private router: Router) {
+  constructor(private menu: MenuController,
+      public apiService: ApiService,
+      private userLocationService: UserLocationService,
+      private modalController: ModalController,
+      private connectionService: ConnectionService,
+      private cd: ChangeDetectorRef,
+      private router: Router,
+      private authService: AuthService) {
     this.serverUrl = this.apiService.getServerUrl();
   }
 
@@ -37,6 +48,10 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit() {
+    this.authService.user$.subscribe(user => {
+      this.USER = user;
+      this.cd.detectChanges();  // Forzar la actualización de la vista
+    });
     this.isOnline = false;
     this.checkNetworkStatus();
     this.loadTiendasData();
@@ -54,6 +69,17 @@ export class HomePage implements OnInit {
       // Forzar actualización del estado si no se refleja automáticamente
       this.cd.detectChanges();
     });
+  }
+
+  ngOnDestroy() {
+    // Desuscribirse del observable para evitar fugas de memoria
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
   // Cargar datos de tiendas

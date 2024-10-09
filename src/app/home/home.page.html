@@ -1,15 +1,28 @@
 <ion-menu side="start" menuId="first" contentId="main-content">
   <ion-header>
     <ion-toolbar class="toolbar-menu">
-      <ion-item lines="none">
+      <!-- Logueado -->
+      <ion-item lines="none" *ngIf="USER">
         <ion-avatar slot="start">
-          <img src="assets/images/user-placeholder.webp" /> <!-- Imagen del usuario -->
+          <img src="assets/images/user-placeholder.webp" />
         </ion-avatar>
         <ion-label>
-          <h2>Mario Jhunior Rojas Chanamoth</h2>
+          <h2>{{ USER.nombre_apellido }}</h2>
           <p routerLink="/login" (click)="closeMenu()">Mi perfil ></p>
         </ion-label>
       </ion-item>
+      <!-- No logueado -->
+      <ion-item lines="none" *ngIf="!USER">
+        <ion-avatar slot="start">
+          <img src="assets/images/blank-avatar.png" style="opacity: 0.5;" />
+        </ion-avatar>
+        <ion-label>
+          <h2>Ingresa a tu cuenta</h2>
+          <p>Administra fácilmente tu perfil y disfruta de todas las ofertas.</p>
+        </ion-label>
+      </ion-item>
+      <ion-button expand="block" routerLink="/login" (click)="closeMenu()" color="dark"
+        *ngIf="!USER">Ingresar</ion-button>
     </ion-toolbar>
   </ion-header>
 
@@ -72,7 +85,7 @@
       </ion-item>
 
       <!-- Sección 2 -->
-      <ion-item routerLink="/moda" lines="none">
+      <ion-item routerLink="/moda" lines="none" (click)="logout()">
         <ion-icon name="shirt-outline" slot="start"></ion-icon>
         <ion-label>Moda</ion-label>
       </ion-item>
@@ -177,7 +190,7 @@
     </div>
 
     <!-- New Arrivals -->
-    <div id="new-arrivals-section" *ngIf="comercios.length > 0">
+    <div id="new-arrivals-section">
       <ion-grid>
 
         <div class="title-card">
@@ -221,7 +234,7 @@
     </div>
 
     <!-- Categorías -->
-    <div id="categories-section" *ngIf="categorias.length > 0">
+    <div id="categories-section">
       <!-- Swiper con Categorías -->
       <hr>
 
@@ -255,7 +268,7 @@
     </div>
 
     <!-- Recien Agregados -->
-    <div id="recent-added-section" *ngIf="listado.length > 0">
+    <div id="recent-added-section">
       <!-- Slider de Productos Recién Agregados -->
       <div class="title-card">
         <h5>Recién Agregados</h5><span>Marketplace <ion-icon name="chevron-forward-outline"></ion-icon></span>

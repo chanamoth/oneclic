@@ -26,6 +26,7 @@ export class StoreProfilePage implements OnInit {
   viewMode: string = 'grid'; // Para alternar entre grid y lista
   sortBy: string = 'relevance'; // Para seleccionar el criterio de orden
   description: SafeResourceUrl = '';
+  miniWeb: SafeResourceUrl = '';
 
   @ViewChild('iframe', { static: false }) iframe!: ElementRef;
 
@@ -65,6 +66,9 @@ export class StoreProfilePage implements OnInit {
         const desc = `https://oneclic.app/comercio_descripcion/${data?.comercio?.idcomercio}`;
         this.description = this.sanitizer.bypassSecurityTrustResourceUrl(desc);
 
+        const blog = `https://oneclic.app/comercio_miniweb/${data?.comercio?.idcomercio}`;
+        this.miniWeb = this.sanitizer.bypassSecurityTrustResourceUrl(blog);
+
         // Ordenar los productos por el criterio seleccionado
         this.sortProducts();
         // Cargar los primeros productos
@@ -79,6 +83,13 @@ export class StoreProfilePage implements OnInit {
     if (iframeWindow.document.body) {
       iframe.style.height = iframeWindow.document.body.scrollHeight + 'px';
     }
+  }
+
+  adjustIframeHeightBlog() {
+    const iframe = this.iframe.nativeElement;
+    iframe.onload = () => {
+      iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 30 + 'px';
+    };
   }
 
   // Función para cargar más productos

@@ -1,6 +1,6 @@
 <app-shared-header title="{{ comercio?.nombre }}" [isLoading]="isLoading" [scrolled]="scrolled"></app-shared-header>
 
-<ion-content [fullscreen]="true" color="light" (ionScroll)="onScroll($event)" scrollEvents="true">
+<ion-content [fullscreen]="true" (ionScroll)="onScroll($event)" scrollEvents="true">
 
   <ion-refresher slot="fixed" (ionRefresh)="refreshData($event)">
     <ion-refresher-content pullingText="Tira para refrescar" refreshingSpinner="crescent"></ion-refresher-content>
@@ -270,6 +270,32 @@
           </ion-content>
         </ng-template>
       </ion-modal>
+    </div>
+
+    <!-- Tab Blog -->
+    <div *ngSwitchCase="'blog'">
+      <iframe [src]="miniWeb" id="miniWeb" scrolling="no" style="min-width: 111%;
+              border: 0px;
+              margin-left: -20px;" (load)="adjustIframeHeightBlog()" *ngIf="!isLoading">
+      </iframe>
+    </div>
+
+    <!-- Tab Live -->
+    <div *ngSwitchCase="'live'">
+      <div *ngIf="comercio?.EstadoLiveStraming == 1" class="text-center mb-30">
+        <img [src]="serverUrl + 'assets/img/videoMeeting.webp'">
+        <p>Seguro que desea entrar a la transmisión en vivo?</p>
+        <br>
+        <ion-button color="dark">Entrar a la transmisión</ion-button>
+      </div>
+      <div *ngIf="comercio?.EstadoLiveStraming != 1" class="text-center mb-30">
+        <p>
+          <img [src]="serverUrl + 'assets/img/oops.webp'">
+        </p>
+        <p>
+          No hay transmisiones programadas.
+        </p>
+      </div>
     </div>
 
     <!-- Otros tabs pueden ir aquí -->
